@@ -5,26 +5,31 @@ from PyQt5 import QtWidgets, QtGui
 import time
 
 import sqlite3
+import shutil
 import os
 
 import docxtpl
 
 
 class UI_Task2(QMainWindow, Ui_MainWindow2):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, *args):
         parent.setDisabled(True)
         self.parent = parent
         super(UI_Task2, self).__init__(parent)
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
+        user = args[0]
+        print(user)
+
         self.frame_second.hide()
         self.frame_first.hide()
         self.pushButton_change_data.clicked.connect(self.first_page)
 
-        self.pushButton_next.clicked.connect(self.next_page)
-        self.pushButton_back.clicked.connect(self.prev_page)
-        self.pushButton_commit.clicked.connect(self.commit)
+        self.lineEdit_surname.setText(user[10])
+        self.lineEdit_name.setText(user[9])
+        self.lineEdit_secondname.setText(user[11])
+        self.lineEdit_email.setText(user[2])
 
         self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))
         self.lineEdit_pass_number.setValidator(QtGui.QIntValidator(0, 100000))
@@ -34,6 +39,10 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.lineEdit_code.setInputMask("###-###")
         self.lineEdit_given_date.setInputMask("##-##-####")
         self.lineEdit_birht_date.setInputMask("##-##-####")
+
+        self.pushButton_next.clicked.connect(self.next_page)
+        self.pushButton_back.clicked.connect(self.prev_page)
+        self.pushButton_commit.clicked.connect(self.commit)
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
@@ -51,8 +60,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
-       
-
         if len(self.lineEdit_achivement_photo.text()) > 1:
             pass
         else:
@@ -60,12 +67,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         return True
 
-
     def printf_2(self):
         try:
             if self.check_second():
                 try:
-                    doc = docxtpl.DocxTemplate("data/шаблон.docx")
+                    doc = docxtpl.DocxTemplate("шаблон.docx")
                     context = {
                         "Имя": self.lineEdit_name.text(),
                         "Фамилия": self.lineEdit_surname.text(),
@@ -100,12 +106,10 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
-
         if self.lineEdit_secondname.text().isalpha():
             pass
         else:
             return False
-
 
         if self.lineEdit_place_birth.text().isalpha():
             pass
@@ -132,7 +136,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
-
         if "@" in self.lineEdit_email.text() and "." in self.lineEdit_email.text():
             pass
         else:
@@ -150,10 +153,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         except ValueError:
             return False
 
-
         return True
-
-
 
     def printf(self):
         # проверка валидности и распечатка
@@ -168,7 +168,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                     "Номер": self.lineEdit_pass_number.text(),
                     "Дата": self.lineEdit_given_date.text(),
 
-
                 }
                 doc.render(context)
                 doc.save('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
@@ -182,11 +181,13 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             print(error)
 
     def commit(self):
+
+
+
         self.frame_second.hide()
         self.frame_greeting.show()
 
         # все данные первой страницы проверены и готовы
-
 
     def first_page(self):
         self.frame_greeting.hide()
@@ -195,8 +196,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
     def next_page(self):
         self.frame_first.hide()
         self.frame_second.show()
-            # все данные готовы
-
+        # все данные готовы
 
     def prev_page(self):
         self.frame_first.show()
@@ -275,7 +275,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 flag = True
                 user = i
         if flag:
-            mainWindow2 = UI_Task2(self)
+            mainWindow2 = UI_Task2(self, user)
             mainWindow2.show()
         else:
             QMessageBox.information(self, 'Ошибка', "Неверный логин или пароль", QMessageBox.Ok)
@@ -302,6 +302,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("data/bd")
+    mainWindow = UI_Task1("bd.db")
     mainWindow.show()
     sys.exit(app.exec())
