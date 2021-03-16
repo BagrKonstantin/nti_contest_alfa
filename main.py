@@ -1,7 +1,7 @@
 from enter import Ui_MainWindow
 from work_with_app import Ui_MainWindow as Ui_MainWindow2
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 import time
 
 import sqlite3
@@ -45,46 +45,13 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.comboBox_achivements.addItems(["Олимпиада"])
 
     def check_second(self):
-        if self.lineEdit_number_of_doc_frame_2.text().isdigit():
-            pass
-        else:
-            return False
 
         if len(self.lineEdit_select_photo_of_doc.text()) > 1:
             pass
         else:
             return False
 
-        if self.comboBox_form_of_edu.currentText():
-            pass
-        else:
-            return False
-
-        if self.comboBox_educ_way.currentText():
-            pass
-        else:
-            return False
-
-
-        if self.comboBox_achivements.currentText():
-            pass
-        else:
-            return False
-
-        if self.lineEdit_math.text().isdigit():
-            pass
-        else:
-            return False
-
-        if self.lineEdit_rus.text().isdigit():
-            pass
-        else:
-            return False
-
-        if self.lineEdit_IR_or_phys.text().isdigit():
-            pass
-        else:
-            return False
+       
 
         if len(self.lineEdit_achivement_photo.text()) > 1:
             pass
@@ -177,43 +144,12 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         except ValueError:
             return False
 
-        if "+" in self.lineEdit_phone.text():
-            if self.lineEdit_phone.text()[1:].isdigit():
-                pass
-            else:
-                return False
-        elif self.lineEdit_phone.text().isdigit():
-            pass
-        else:
-            return False
-
-        if "".join(self.lineEdit_series.text().split(" ")).isdigit() and len("".join(self.lineEdit_series.text().split(" "))) == 4:
-            self.lineEdit_series.setText("".join(self.lineEdit_series.text().split(" ")))
-        else:
-            return False
-
-        if self.lineEdit_pass_number.text().isdigit() and len("".join(self.lineEdit_pass_number.text().split(" "))) == 6:
-            pass
-        else:
-            return False
-
-        if "-" in self.lineEdit_code.text():
-            a = self.lineEdit_code.text().split("-")
-            if len(a[0]) == len(a[1]) == 3 and a[0].isdigit() and a[1].isdigit():
-                pass
-        else:
-            return False
-
         try:
             date = self.lineEdit_given_date.text()
             valid_date = time.strptime(date, '%m-%d-%Y')
         except ValueError:
             return False
 
-        if self.lineEdit_index.text().isdigit():
-            pass
-        else:
-            return False
 
         return True
 
