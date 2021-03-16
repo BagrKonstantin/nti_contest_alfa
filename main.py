@@ -26,7 +26,14 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.pushButton_back.clicked.connect(self.prev_page)
         self.pushButton_commit.clicked.connect(self.commit)
 
-        self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))     #
+        self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))
+        self.lineEdit_pass_number.setValidator(QtGui.QIntValidator(0, 100000))
+        self.lineEdit_index.setValidator(QtGui.QIntValidator(0, 10000000))
+
+        self.lineEdit_phone.setInputMask("+7(###)-###-##-##)")
+        self.lineEdit_code.setInputMask("###-###")
+        self.lineEdit_given_date.setInputMask("##-##-####")
+        self.lineEdit_birht_date.setInputMask("##-##-####")
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
