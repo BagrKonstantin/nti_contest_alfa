@@ -19,7 +19,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
-        self.pushButton_next.clicked.connect()
+        self.pushButton_next.clicked.connect(self.next_page)
+
+        self.frame_second.hide()
+
+
 
     def next_page(self):
         self.frame_first.hide()
