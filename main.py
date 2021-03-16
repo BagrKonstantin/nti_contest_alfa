@@ -207,6 +207,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         if len(self.lineEdit_zayavlenie.text()) > 1:
             self.frame_second.hide()
             self.frame_greeting.show()
+
+            # все данные первой страницы проверены и готовы
         else:
             QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
 
@@ -218,6 +220,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         if len(self.lineEdit_agreement.text()) > 1:
             self.frame_first.hide()
             self.frame_second.show()
+            # все данные готовы
         else:
             QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
 
