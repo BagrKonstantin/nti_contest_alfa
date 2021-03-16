@@ -1,7 +1,7 @@
 from enter import Ui_MainWindow
 from work_with_app import Ui_MainWindow as Ui_MainWindow2
-from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QLabel, QFileDialog
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5 import QtWidgets
 import time
 
 import sqlite3
@@ -36,12 +36,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.lineEdit_birht_date.setInputMask("##-##-####")
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
-
-        self.lineEdit_agreement.setEnabled(False)
-        self.pushButton_select_photo_passport_select_agreement.setEnabled(False)
-
-        self.lineEdit_zayavlenie.setEnabled(False)
-        self.pushButton_select_zayvlenie.setEnabled(False)
 
         self.pushButton_zayvlenie.clicked.connect(self.printf_2)
 
@@ -103,9 +97,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
     def printf_2(self):
         try:
             if self.check_second():
-                self.frame_second_data.setEnabled(False)
-                self.lineEdit_zayavlenie.setEnabled(True)
-                self.pushButton_select_zayvlenie.setEnabled(True)
                 try:
                     doc = docxtpl.DocxTemplate("data/шаблон.docx")
                     context = {
@@ -227,13 +218,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         return True
 
 
+
     def printf(self):
         # проверка валидности и распечатка
         try:
             if self.check_first():
-                self.frame_first_data.setEnabled(False)
-                self.lineEdit_agreement.setEnabled(True)
-                self.pushButton_select_photo_passport_select_agreement.setEnabled(True)
                 doc = docxtpl.DocxTemplate("data/шаблон1.docx")
                 context = {
                     "Имя": self.lineEdit_name.text(),
@@ -257,25 +246,21 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             print(error)
 
     def commit(self):
-        if len(self.lineEdit_zayavlenie.text()) > 1:
-            self.frame_second.hide()
-            self.frame_greeting.show()
+        self.frame_second.hide()
+        self.frame_greeting.show()
 
-            # все данные первой страницы проверены и готовы
-        else:
-            QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
+        # все данные первой страницы проверены и готовы
+
 
     def first_page(self):
         self.frame_greeting.hide()
         self.frame_first.show()
 
     def next_page(self):
-        if len(self.lineEdit_agreement.text()) > 1:
-            self.frame_first.hide()
-            self.frame_second.show()
+        self.frame_first.hide()
+        self.frame_second.show()
             # все данные готовы
-        else:
-            QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
+
 
     def prev_page(self):
         self.frame_first.show()
@@ -381,6 +366,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("bd.db")
+    mainWindow = UI_Task1("data/bd")
     mainWindow.show()
     sys.exit(app.exec())
