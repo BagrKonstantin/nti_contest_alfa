@@ -10,6 +10,7 @@ from PyQt5 import Qt
 from PyQt5.QtGui import QPixmap
 import os
 
+
 class UI_Task2(QMainWindow, Ui_MainWindow2):
     def __init__(self, parent=None):
         parent.setDisabled(True)
