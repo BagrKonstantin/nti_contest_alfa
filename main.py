@@ -80,7 +80,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         try:
             date = self.lineEdit_birht_date.text()
-            valid_date = time.strptime(date, '%m/%d/%Y')
+            valid_date = time.strptime(date, '%m-%d-%Y')
         except ValueError:
             return False
 
@@ -113,7 +113,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         try:
             date = self.lineEdit_given_date.text()
-            valid_date = time.strptime(date, '%m/%d/%Y')
+            valid_date = time.strptime(date, '%m-%d-%Y')
         except ValueError:
             return False
 
@@ -127,7 +127,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
     def printf(self):
         # проверка валидности и распечатка
         if self.check_first():
-            pass
+            self.frame_first_data.setEnabled(False)
         else:
             QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
 
