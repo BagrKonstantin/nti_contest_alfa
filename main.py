@@ -32,6 +32,70 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.lineEdit_agreement.setEnabled(False)
         self.pushButton_select_photo_passport_select_agreement.setEnabled(False)
 
+        self.lineEdit_zayavlenie.setEnabled(False)
+        self.pushButton_select_zayvlenie.setEnabled(False)
+
+        self.pushButton_zayvlenie.clicked.connect(self.printf_2)
+
+    def check_second(self):
+        return True
+        if self.lineEdit_number_of_doc_frame_2.text().isdigit():
+            pass
+        else:
+            return False
+
+        if len(self.lineEdit_select_photo_of_doc.text()) > 1:
+            pass
+        else:
+            return False
+
+        if self.comboBox_form_of_edu.itemText():
+            pass
+        else:
+            return False
+
+        if self.comboBox_educ_way.itemText():
+            pass
+        else:
+            return False
+
+
+        if self.comboBox_achivements.itemText():
+            pass
+        else:
+            return False
+
+        if self.lineEdit_math.text().isdigit():
+            pass
+        else:
+            return False
+
+        if self.lineEdit_rus.text().isdigit():
+            pass
+        else:
+            return False
+
+        if self.lineEdit_IR_or_phys.text().isdigit():
+            pass
+        else:
+            return False
+
+        if len(self.lineEdit_achivement_photo.text()) > 1:
+            pass
+        else:
+            return False
+
+        return True
+
+
+    def printf_2(self):
+        if self.check_second():
+            self.frame_second_data.setEnabled(False)
+            self.lineEdit_zayavlenie.setEnabled(True)
+            self.pushButton_select_zayvlenie.setEnabled(True)
+        else:
+            QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+
     def check_first(self):
         return True
         if self.lineEdit_surname.text().isalpha():
@@ -140,8 +204,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
 
     def commit(self):
-        self.frame_second.hide()
-        self.frame_greeting.show()
+        if len(self.lineEdit_zayavlenie.text()) > 1:
+            self.frame_second.hide()
+            self.frame_greeting.show()
+        else:
+            QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
 
     def first_page(self):
         self.frame_greeting.hide()
