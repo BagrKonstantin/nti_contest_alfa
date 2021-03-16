@@ -18,11 +18,11 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.setWindowTitle('enter data')
         self.path = path
 
-        self.tableWidget.cellClicked.connect(self.open_tab)
-        self.tableWidget.setRowCount(1)
+        self.tableWidget_2.cellClicked.connect(self.open_tab)
+        self.tableWidget_2.setRowCount(1)
 
-        self.tableWidget.setItem(0, 0, QTableWidgetItem())
-        self.tableWidget.item(0, 0).setText("  sdg")
+        self.tableWidget_2.setItem(0, 0, QTableWidgetItem())
+        self.tableWidget_2.item(0, 0).setText("  sdg")
 
 
     def open_tab(self):
@@ -42,7 +42,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         if msg.clickedButton() == ok_button:
             print("opendialog")
             try:
-                dialog = Dialog(self, num=self.tableWidget.verticalHeader().sortIndicatorSection())
+                dialog = Dialog(self, num=self.tableWidget_2.verticalHeader().sortIndicatorSection())
                 dialog.show()
                 print("no error")
             except Exception as error:
@@ -57,6 +57,7 @@ class Dialog(QMainWindow, Dialog_ui):
         super(Dialog, self).__init__(parent)
         self.setupUi(self)
         self.setWindowTitle('Dialog')
+
 
         self.pushButton.clicked.connect(self.back)
 
