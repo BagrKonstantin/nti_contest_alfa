@@ -4,11 +4,10 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import QtWidgets
 import time
 
-
 import sqlite3
-
 import os
 
+import docxtpl
 
 
 class UI_Task2(QMainWindow, Ui_MainWindow2):
@@ -98,26 +97,26 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                 self.frame_second_data.setEnabled(False)
                 self.lineEdit_zayavlenie.setEnabled(True)
                 self.pushButton_select_zayvlenie.setEnabled(True)
-                # try:
-                #     doc = docxtpl.DocxTemplate("шаблон.docx")
-                #     context = {
-                #         "Имя": self.lineEdit_name.text(),
-                #         "Фамилия": self.lineEdit_surname.text(),
-                #         "Отчество": self.lineEdit_secondname.text(),
-                #         "Серия": self.lineEdit_series.text(),
-                #         "Номер": self.lineEdit_pass_number.text(),
-                #         "Дата": self.lineEdit_given_date.text(),
-                #         "Выданкем": self.lineEdit_given_by.text(),
-                #         "Специальность": self.comboBox_educ_way.currentText(),
-                #         "Формаобуч": self.comboBox_form_of_edu.currentText(),
-                #
-                #     }
-                #     doc.render(context)
-                #     doc.save('Заявление о зачислении.docx')
-                #
-                #     os.startfile('Заявление о зачислении.docx')
-                # except Exception as error:
-                #     print(error)
+                try:
+                    doc = docxtpl.DocxTemplate("data/шаблон.docx")
+                    context = {
+                        "Имя": self.lineEdit_name.text(),
+                        "Фамилия": self.lineEdit_surname.text(),
+                        "Отчество": self.lineEdit_secondname.text(),
+                        "Серия": self.lineEdit_series.text(),
+                        "Номер": self.lineEdit_pass_number.text(),
+                        "Дата": self.lineEdit_given_date.text(),
+                        "Выданкем": self.lineEdit_given_by.text(),
+                        "Специальность": self.comboBox_educ_way.currentText(),
+                        "Формаобуч": self.comboBox_form_of_edu.currentText(),
+
+                    }
+                    doc.render(context)
+                    doc.save('Заявление о зачислении.docx')
+
+                    os.startfile('Заявление о зачислении.docx')
+                except Exception as error:
+                    print(error)
             else:
                 QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
         except Exception as error:
@@ -227,25 +226,25 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                 self.frame_first_data.setEnabled(False)
                 self.lineEdit_agreement.setEnabled(True)
                 self.pushButton_select_photo_passport_select_agreement.setEnabled(True)
-            #     doc = docxtpl.DocxTemplate("шаблон1.docx")
-            #     context = {
-            #         "Имя": self.lineEdit_name.text(),
-            #         "Фамилия": self.lineEdit_surname.text(),
-            #         "Отчество": self.lineEdit_secondname.text(),
-            #         "Серия": self.lineEdit_series.text(),
-            #         "Номер": self.lineEdit_pass_number.text(),
-            #         "Дата": self.lineEdit_given_date.text(),
-            #
-            #
-            #     }
-            #     doc.render(context)
-            #     doc.save('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
-            #
-            #     os.startfile('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
-            #
-            #
-            # else:
-            #     QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+                doc = docxtpl.DocxTemplate("data/шаблон1.docx")
+                context = {
+                    "Имя": self.lineEdit_name.text(),
+                    "Фамилия": self.lineEdit_surname.text(),
+                    "Отчество": self.lineEdit_secondname.text(),
+                    "Серия": self.lineEdit_series.text(),
+                    "Номер": self.lineEdit_pass_number.text(),
+                    "Дата": self.lineEdit_given_date.text(),
+
+
+                }
+                doc.render(context)
+                doc.save('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
+
+                os.startfile('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
+
+
+            else:
+                QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
         except Exception as error:
             print(error)
 
@@ -374,6 +373,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("bd")
+    mainWindow = UI_Task1("data/bd")
     mainWindow.show()
     sys.exit(app.exec())
