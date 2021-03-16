@@ -51,7 +51,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
-       
+
 
         if len(self.lineEdit_achivement_photo.text()) > 1:
             pass
