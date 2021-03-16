@@ -19,15 +19,29 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
-        self.pushButton_next.clicked.connect(self.next_page)
-
         self.frame_second.hide()
+        self.frame_first.hide()
+        self.pushButton_change_data.clicked.connect(self.first_page)
 
+        self.pushButton_next.clicked.connect(self.next_page)
+        self.pushButton_back.clicked.connect(self.prev_page)
+        self.pushButton_commit.clicked.connect(self.commit)
 
+    def commit(self):
+        self.frame_second.hide()
+        self.frame_greeting.show()
+
+    def first_page(self):
+        self.frame_greeting.hide()
+        self.frame_first.show()
 
     def next_page(self):
         self.frame_first.hide()
         self.frame_second.show()
+
+    def prev_page(self):
+        self.frame_first.show()
+        self.frame_second.hide()
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
