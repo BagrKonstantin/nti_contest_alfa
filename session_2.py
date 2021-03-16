@@ -9,11 +9,14 @@ import os
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
-    def __init__(self, path):
+    def __init__(self, path, *args):
         super(UI_Task1, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('enter data')
         self.path = path
+
+
+
 
 
 
