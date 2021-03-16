@@ -2,7 +2,7 @@ from enter import Ui_MainWindow
 from work_with_app import  Ui_MainWindow as Ui_MainWindow2
 from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QLabel, QFileDialog
 from PyQt5 import QtWidgets, QtGui, QtCore
-
+import time
 
 from PyQt5.Qt import QPrintDialog, QPrinter
 import sqlite3
@@ -26,6 +26,110 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.pushButton_next.clicked.connect(self.next_page)
         self.pushButton_back.clicked.connect(self.prev_page)
         self.pushButton_commit.clicked.connect(self.commit)
+
+        self.pushButton_recieve_agr.clicked.connect(self.printf)
+
+    def check_first(self):
+        if self.lineEdit_surname.text().isalpha():
+            pass
+        else:
+            return False
+
+        if self.lineEdit_name.text().isalpha():
+            pass
+        else:
+            return False
+
+
+        if self.lineEdit_secondname.text().isalpha():
+            pass
+        else:
+            return False
+
+
+        if self.lineEdit_place_birth.text().isalpha():
+            pass
+        else:
+            return False
+
+        if len(self.lineEdit_photo.text()) > 1:
+            pass
+        else:
+            return False
+
+        if self.lineEdit_given_by.text().isalpha():
+            pass
+        else:
+            return False
+
+        if len(self.lineEdit_photo_passport.text()) > 1:
+            pass
+        else:
+            return False
+
+        if len(self.lineEdit_adress.text()) > 5:
+            pass
+        else:
+            return False
+
+
+        if "@" in self.lineEdit_email.text():
+            pass
+        else:
+            return False
+
+        try:
+            date = self.lineEdit_birht_date.text()
+            valid_date = time.strptime(date, '%m/%d/%Y')
+        except ValueError:
+            return False
+
+        if "+" in self.lineEdit_phone.text():
+            if self.lineEdit_phone.text()[1:].isdigit():
+                pass
+            else:
+                return False
+        elif self.lineEdit_phone.text().isdigit():
+            pass
+        else:
+            return False
+
+        if "".join(self.lineEdit_series.text().split(" ")).isdigit() and len("".join(self.lineEdit_series.text().split(" "))) == 4:
+            self.lineEdit_series.setText("".join(self.lineEdit_series.text().split(" ")))
+        else:
+            return False
+
+        if self.lineEdit_pass_number.text().split(" ").isdigit() and len("".join(self.lineEdit_pass_number.text().split(" "))) == 6:
+            pass
+        else:
+            return False
+
+        if "-" in self.lineEdit_code.text():
+            a = self.lineEdit_code.text().split("-")
+            if len(a[0]) == len(a[1]) == 3 and a[0].isdigit() and a[1].isdigit():
+                pass
+        else:
+            return False
+
+        try:
+            date = self.lineEdit_given_date.text()
+            valid_date = time.strptime(date, '%m/%d/%Y')
+        except ValueError:
+            return False
+
+        if self.lineEdit_index.text().isdigit():
+            pass
+        else:
+            return False
+
+
+
+    def printf(self):
+        # проверка валидности и распечатка
+        if self.check_first():
+            pass
+        else:
+            QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
 
     def commit(self):
         self.frame_second.hide()
