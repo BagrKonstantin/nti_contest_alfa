@@ -10,6 +10,8 @@ from PyQt5 import Qt
 from PyQt5.QtGui import QPixmap
 import os
 
+import docxtpl
+
 
 class UI_Task2(QMainWindow, Ui_MainWindow2):
     def __init__(self, parent=None):
@@ -37,8 +39,12 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         self.pushButton_zayvlenie.clicked.connect(self.printf_2)
 
+        self.comboBox_form_of_edu.addItems(["бюджет", "платное"])
+        self.comboBox_educ_way.addItems(["Информационных технологий", "Сети и системы связи"])
+
+        self.comboBox_achivements.addItems(["Олимпиада"])
+
     def check_second(self):
-        return True
         if self.lineEdit_number_of_doc_frame_2.text().isdigit():
             pass
         else:
@@ -49,18 +55,18 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
-        if self.comboBox_form_of_edu.itemText():
+        if self.comboBox_form_of_edu.currentText():
             pass
         else:
             return False
 
-        if self.comboBox_educ_way.itemText():
+        if self.comboBox_educ_way.currentText():
             pass
         else:
             return False
 
 
-        if self.comboBox_achivements.itemText():
+        if self.comboBox_achivements.currentText():
             pass
         else:
             return False
@@ -89,15 +95,37 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
 
     def printf_2(self):
-        if self.check_second():
-            self.frame_second_data.setEnabled(False)
-            self.lineEdit_zayavlenie.setEnabled(True)
-            self.pushButton_select_zayvlenie.setEnabled(True)
-        else:
-            QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        try:
+            if self.check_second():
+                self.frame_second_data.setEnabled(False)
+                self.lineEdit_zayavlenie.setEnabled(True)
+                self.pushButton_select_zayvlenie.setEnabled(True)
+                try:
+                    doc = docxtpl.DocxTemplate("data/шаблон.docx")
+                    context = {
+                        "Имя": self.lineEdit_name.text(),
+                        "Фамилия": self.lineEdit_surname.text(),
+                        "Отчество": self.lineEdit_secondname.text(),
+                        "Серия": self.lineEdit_series.text(),
+                        "Номер": self.lineEdit_pass_number.text(),
+                        "Дата": self.lineEdit_given_date.text(),
+                        "Выданкем": self.lineEdit_given_by.text(),
+                        "Специальность": self.comboBox_educ_way.currentText(),
+                        "Формаобуч": self.comboBox_form_of_edu.currentText(),
+
+                    }
+                    doc.render(context)
+                    doc.save('Заявление о зачислении.docx')
+
+                    os.startfile('Заявление о зачислении.docx')
+                except Exception as error:
+                    print(error)
+            else:
+                QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        except Exception as error:
+            print(error)
 
     def check_first(self):
-        return True
         if self.lineEdit_surname.text().isalpha():
             pass
         else:
@@ -141,7 +169,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             return False
 
 
-        if "@" in self.lineEdit_email.text():
+        if "@" in self.lineEdit_email.text() and "." in self.lineEdit_email.text():
             pass
         else:
             return False
@@ -167,7 +195,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
-        if self.lineEdit_pass_number.text().split(" ").isdigit() and len("".join(self.lineEdit_pass_number.text().split(" "))) == 6:
+        if self.lineEdit_pass_number.text().isdigit() and len("".join(self.lineEdit_pass_number.text().split(" "))) == 6:
             pass
         else:
             return False
@@ -196,12 +224,32 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
     def printf(self):
         # проверка валидности и распечатка
-        if self.check_first():
-            self.frame_first_data.setEnabled(False)
-            self.lineEdit_agreement.setEnabled(True)
-            self.pushButton_select_photo_passport_select_agreement.setEnabled(True)
-        else:
-            QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        try:
+            if self.check_first():
+                self.frame_first_data.setEnabled(False)
+                self.lineEdit_agreement.setEnabled(True)
+                self.pushButton_select_photo_passport_select_agreement.setEnabled(True)
+                doc = docxtpl.DocxTemplate("data/шаблон1.docx")
+                context = {
+                    "Имя": self.lineEdit_name.text(),
+                    "Фамилия": self.lineEdit_surname.text(),
+                    "Отчество": self.lineEdit_secondname.text(),
+                    "Серия": self.lineEdit_series.text(),
+                    "Номер": self.lineEdit_pass_number.text(),
+                    "Дата": self.lineEdit_given_date.text(),
+
+
+                }
+                doc.render(context)
+                doc.save('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
+
+                os.startfile('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
+
+
+            else:
+                QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        except Exception as error:
+            print(error)
 
     def commit(self):
         if len(self.lineEdit_zayavlenie.text()) > 1:
@@ -261,7 +309,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
     def reg_user(self):
         try:
-            if "@" not in self.lineEdit_mail.text():
+            if not ("@" in self.lineEdit_mail.text() and "." in self.lineEdit_mail.text()):
                 QMessageBox.information(self, 'Ошибка', "Невалидный email", QMessageBox.Ok)
                 return
             user_data = [self.lineEdit_name.text(), self.lineEdit_surname.text(), self.lineEdit_sec_name.text()]
@@ -287,6 +335,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             else:
                 QMessageBox.information(self, 'Ошибка', "Такой пользователь уже существует", QMessageBox.Ok)
             print(user_data)
+            self.swap()
         except Exception as err:
             print(err)
 
@@ -327,6 +376,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("bd")
+    mainWindow = UI_Task1("data/bd")
     mainWindow.show()
     sys.exit(app.exec())
