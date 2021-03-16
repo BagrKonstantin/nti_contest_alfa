@@ -29,7 +29,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
+        self.lineEdit_agreement.setEnabled(False)
+        self.pushButton_select_photo_passport_select_agreement.setEnabled(False)
+
     def check_first(self):
+        return True
         if self.lineEdit_surname.text().isalpha():
             pass
         else:
@@ -122,12 +126,16 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         else:
             return False
 
+        return True
+
 
 
     def printf(self):
         # проверка валидности и распечатка
         if self.check_first():
             self.frame_first_data.setEnabled(False)
+            self.lineEdit_agreement.setEnabled(True)
+            self.pushButton_select_photo_passport_select_agreement.setEnabled(True)
         else:
             QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
 
@@ -140,8 +148,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.frame_first.show()
 
     def next_page(self):
-        self.frame_first.hide()
-        self.frame_second.show()
+        if len(self.lineEdit_agreement.text()) > 1:
+            self.frame_first.hide()
+            self.frame_second.show()
+        else:
+            QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
 
     def prev_page(self):
         self.frame_first.show()
