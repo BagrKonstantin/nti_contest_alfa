@@ -170,6 +170,20 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
         self.pushButton_enter.clicked.connect(self.open_tab)
 
+        self.pushButton_reg.clicked.connect(self.reg_user)
+
+    def reg_user(self):
+        data = [self.lineEdit_name.text(), self.lineEdit_surname.text(), self.lineEdit_sec_name.text()]
+        if self.pushButton_female.isEnabled():
+            data.append(0)
+        else:
+            data.append(1)
+        data.append(self.lineEdit_email_enter.text())
+        data.append(self.lineEdit_password.text())
+        print(data)
+
+
+
     def open_tab(self):
         mainWindow2 = UI_Task2(self)
         mainWindow2.show()
