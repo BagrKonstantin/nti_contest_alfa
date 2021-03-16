@@ -28,12 +28,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
-        self.lineEdit_agreement.setEnabled(False)
-        self.pushButton_select_photo_passport_select_agreement.setEnabled(False)
-
-        self.lineEdit_zayavlenie.setEnabled(False)
-        self.pushButton_select_zayvlenie.setEnabled(False)
-
         self.pushButton_zayvlenie.clicked.connect(self.printf_2)
 
         self.comboBox_form_of_edu.addItems(["бюджет", "платное"])
@@ -42,6 +36,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.comboBox_achivements.addItems(["Олимпиада"])
 
     def check_second(self):
+        return True
         if self.lineEdit_number_of_doc_frame_2.text().isdigit():
             pass
         else:
@@ -94,9 +89,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
     def printf_2(self):
         try:
             if self.check_second():
-                self.frame_second_data.setEnabled(False)
-                self.lineEdit_zayavlenie.setEnabled(True)
-                self.pushButton_select_zayvlenie.setEnabled(True)
                 try:
                     doc = docxtpl.DocxTemplate("data/шаблон.docx")
                     context = {
@@ -123,6 +115,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             print(error)
 
     def check_first(self):
+        return True
         if self.lineEdit_surname.text().isalpha():
             pass
         else:
@@ -223,9 +216,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         # проверка валидности и распечатка
         try:
             if self.check_first():
-                self.frame_first_data.setEnabled(False)
-                self.lineEdit_agreement.setEnabled(True)
-                self.pushButton_select_photo_passport_select_agreement.setEnabled(True)
                 doc = docxtpl.DocxTemplate("data/шаблон1.docx")
                 context = {
                     "Имя": self.lineEdit_name.text(),
@@ -249,25 +239,21 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             print(error)
 
     def commit(self):
-        if len(self.lineEdit_zayavlenie.text()) > 1:
-            self.frame_second.hide()
-            self.frame_greeting.show()
+        self.frame_second.hide()
+        self.frame_greeting.show()
 
-            # все данные первой страницы проверены и готовы
-        else:
-            QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
+        # все данные первой страницы проверены и готовы
+
 
     def first_page(self):
         self.frame_greeting.hide()
         self.frame_first.show()
 
     def next_page(self):
-        if len(self.lineEdit_agreement.text()) > 1:
-            self.frame_first.hide()
-            self.frame_second.show()
+        self.frame_first.hide()
+        self.frame_second.show()
             # все данные готовы
-        else:
-            QMessageBox.critical(self, "Ошибка", "Загрузите согласие", QMessageBox.Ok)
+
 
     def prev_page(self):
         self.frame_first.show()

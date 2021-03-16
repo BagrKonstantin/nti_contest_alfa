@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1783</width>
-    <height>1097</height>
+    <width>818</width>
+    <height>624</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>-10</x>
+      <x>50</x>
       <y>40</y>
       <width>761</width>
       <height>521</height>
@@ -540,10 +540,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>390</y>
-      <width>761</width>
-      <height>491</height>
+      <x>50</x>
+      <y>30</y>
+      <width>901</width>
+      <height>541</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -906,10 +906,10 @@
    <widget class="QFrame" name="frame_greeting">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>50</x>
       <y>50</y>
-      <width>601</width>
-      <height>491</height>
+      <width>851</width>
+      <height>631</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -974,7 +974,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1783</width>
+     <width>818</width>
      <height>21</height>
     </rect>
    </property>
