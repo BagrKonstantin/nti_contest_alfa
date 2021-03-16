@@ -12,7 +12,7 @@ import os
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
-    def __init__(self, path):
+    def __init__(self, path, *args):
         super(UI_Task1, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('enter data')
@@ -77,6 +77,9 @@ class Dialog(QMainWindow, Dialog_ui):
     def back(self):
         self.close()
         self.parent.setDisabled(False)
+
+
+
 
 if __name__ == "__main__":
     import sys
