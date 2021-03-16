@@ -36,7 +36,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.comboBox_achivements.addItems(["Олимпиада"])
 
     def check_second(self):
-        return True
         if self.lineEdit_number_of_doc_frame_2.text().isdigit():
             pass
         else:
@@ -115,7 +114,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             print(error)
 
     def check_first(self):
-        return True
         if self.lineEdit_surname.text().isalpha():
             pass
         else:
