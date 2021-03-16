@@ -4,10 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QLabel, 
 from PyQt5 import QtWidgets, QtGui, QtCore
 import time
 
-from PyQt5.Qt import QPrintDialog, QPrinter
 import sqlite3
-from PyQt5 import Qt
-from PyQt5.QtGui import QPixmap
 import os
 
 import docxtpl
@@ -28,6 +25,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.pushButton_next.clicked.connect(self.next_page)
         self.pushButton_back.clicked.connect(self.prev_page)
         self.pushButton_commit.clicked.connect(self.commit)
+
+        self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))     #
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
@@ -221,7 +220,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         return True
 
 
-
     def printf(self):
         # проверка валидности и распечатка
         try:
@@ -376,6 +374,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("data/bd")
+    mainWindow = UI_Task1("bd.db")
     mainWindow.show()
     sys.exit(app.exec())
