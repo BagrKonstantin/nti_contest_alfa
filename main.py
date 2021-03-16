@@ -261,6 +261,9 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
     def reg_user(self):
         try:
+            if "@" not in self.lineEdit_mail.text():
+                QMessageBox.information(self, 'Ошибка', "Невалидный email", QMessageBox.Ok)
+                return
             user_data = [self.lineEdit_name.text(), self.lineEdit_surname.text(), self.lineEdit_sec_name.text()]
             if self.pushButton_female.isEnabled():
                 user_data.append(0)
