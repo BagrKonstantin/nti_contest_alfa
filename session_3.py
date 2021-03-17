@@ -11,7 +11,16 @@ import smtplib
 import sqlite3
 import smtplib
 import os
-import docx
+# from mako.template import Template
+# template = Template(filename='Формат личного дела.pdf')
+# output = Template.render(first_name='Simon', postcode='12345')
+
+from fpdf import FPDF
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Arial", size=12)
+pdf.cell(200, 10, txt="Welcome to Python!", ln=1, align="C")
+pdf.output("simple_demo.pdf")
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
@@ -88,23 +97,6 @@ class Dialog(QMainWindow, Dialog_ui):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
-        # doc = docx.Document()
-        #
-        # # добавляем первый параграф
-        # doc.add_paragraph('Здравствуй, мир!')
-        #
-        # # добавляем еще два параграфа
-        # par1 = doc.add_paragraph('Это второй абзац.')
-        # par2 = doc.add_paragraph('Это третий абзац.')
-        #
-        # # добавляем текст во второй параграф
-        # par1.add_run(' Этот текст был добавлен во второй абзац.')
-        #
-        # # добавляем текст в третий параграф
-        # par2.add_run(' Добавляем текст в третий абзац.').bold = True
-        #
-        # doc.save('helloworld.docx')
-        # os.startfile('helloworld.docx')
 
 
 
