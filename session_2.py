@@ -49,12 +49,19 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             for i in range(len(data)):
                 self.tableWidget_4.setItem(i, 0, QTableWidgetItem())
                 self.tableWidget_4.setItem(i, 1, QTableWidgetItem())
+                self.tableWidget_4.setItem(i, 2, QTableWidgetItem())
+                self.tableWidget_4.setItem(i, 3, QTableWidgetItem())
 
                 self.tableWidget_4.item(i, 0).setText(str(data[i][1] + " " + data[i][2] + " " + data[i][3]))
-                if self.data[i][30] == 1:
-                    self.tableWidget_4.item(i, 1).setText(str('да'))
+                self.tableWidget_4.item(i, 1).setText(str(data[i][23] + data[i][24] + data[i][25] + data[i][26]))
+                if data[i][29] == 1:
+                    self.tableWidget_4.item(i, 2).setText('10')
                 else:
-                    self.tableWidget_4.item(i, 1).setText(str('нет'))
+                    self.tableWidget_4.item(i, 2).setText('0')
+                if self.data[i][30] == 1:
+                    self.tableWidget_4.item(i, 3).setText(str('да'))
+                else:
+                    self.tableWidget_4.item(i, 3).setText(str('нет'))
         except Exception as err:
             print(err)
 
