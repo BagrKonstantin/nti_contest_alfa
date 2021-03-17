@@ -287,8 +287,8 @@ class Dialog(QMainWindow, Dialog_ui):
         message = message.encode("utf-8")
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login("mypubllicmail@gmail.com",  "aleks321245")
-        server.sendmail("mypubllicmail@gmail.com", email, message)
+        server.login("info26.sgu@gmail.com",  "aleks321245")
+        server.sendmail("info26.sgu@gmail.com", email, message)
         server.quit()
 
 
