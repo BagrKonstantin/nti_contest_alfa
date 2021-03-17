@@ -21,7 +21,9 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.path = path
         self.update_data()
         self.update_table()
+        self.update_table2()
         self.tableWidget_2.cellClicked.connect(self.open_tab)
+        self.comboBox.addItems(['', 'ПМ', 'ИВТ', 'АУТС', 'ИкТ', 'ЗСС'])
 
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
@@ -29,6 +31,38 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+
+        self.pushButton.clicked.connect(self.update_table2)
+
+    def update_table2(self):
+        try:
+            con = sqlite3.connect(self.path)
+            cur = con.cursor()
+            data = cur.execute("""Select * from user where napravlenie = '{}'""".format(self.comboBox.currentText())).fetchall()
+            con.close()
+            self.tableWidget.setRowCount(len(data))
+            for i in range(len(data)):
+                self.tableWidget.setItem(i, 0, QTableWidgetItem())
+                self.tableWidget.setItem(i, 1, QTableWidgetItem())
+                self.tableWidget.setItem(i, 2, QTableWidgetItem())
+                self.tableWidget.setItem(i, 3, QTableWidgetItem())
+
+                # print(sum(data[i][23] + data[i][24] + data[i][25] + data[i][26]))
+
+                self.tableWidget.item(i, 0).setText(str(data[i][1] + " " + data[i][2] + " " + data[i][3]))
+                self.tableWidget.item(i, 1).setText(str(data[i][23] + data[i][24] + data[i][25] + data[i][26]))
+                print(1)
+                if data[i][29] == 1:
+                    self.tableWidget.item(i, 2).setText('10')
+                else:
+                    self.tableWidget.item(i, 2).setText('0')
+                print(2)
+                if data[i][30] == 1:
+                    self.tableWidget.item(i, 3).setText(str('да'))
+                else:
+                    self.tableWidget.item(i, 3).setText(str('нет'))
+        except Exception as err:
+            print(err)
 
     def update_table(self):
         try:
@@ -186,9 +220,6 @@ class Dialog(QMainWindow, Dialog_ui):
 
         except Exception as error:
             print(error)
-
-
-
 
 
 
