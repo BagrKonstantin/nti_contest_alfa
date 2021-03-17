@@ -197,6 +197,8 @@ class Dialog(QMainWindow, Dialog_ui):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
+
+
         # for i, j in enumerate(args[0]):
         #     print(j, i)
 
@@ -273,7 +275,7 @@ class Dialog(QMainWindow, Dialog_ui):
         except Exception as err:
             print(err)
     def open1(self):
-        os.startfile(os.getcwd() + "/" +  self.data_file[1])
+        os.startfile(os.getcwd() + "/" + self.data_file[1])
     def open2(self):
         os.startfile(os.getcwd() + "/" + self.data_file[2])
     def open3(self):

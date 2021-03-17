@@ -28,7 +28,7 @@
     </property>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Списки</string>
      </attribute>
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">
@@ -73,7 +73,7 @@
     </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>По направлениям</string>
      </attribute>
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
@@ -149,7 +149,7 @@
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
-      <string>Страница</string>
+      <string>Общая по университету</string>
      </attribute>
      <widget class="QTableWidget" name="tableWidget_3">
       <property name="geometry">
@@ -184,7 +184,7 @@
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
-      <string>Страница</string>
+      <string>По общежитию</string>
      </attribute>
      <widget class="QTableWidget" name="tableWidget_4">
       <property name="geometry">
@@ -225,7 +225,7 @@
      <x>0</x>
      <y>0</y>
      <width>776</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
