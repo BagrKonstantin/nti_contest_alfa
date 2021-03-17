@@ -13,61 +13,7 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>40</y>
-      <width>821</width>
-      <height>571</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>ФИО</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>пол</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>E-mail</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>телефон</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>статус</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>стадия</string>
-     </property>
-    </column>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>744</x>
-      <y>620</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Посмотреть таблицу</string>
-    </property>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>

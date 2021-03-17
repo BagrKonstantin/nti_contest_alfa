@@ -202,7 +202,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>110</y>
+      <y>130</y>
       <width>47</width>
       <height>13</height>
      </rect>
@@ -293,7 +293,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>180</y>
+      <y>200</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -306,7 +306,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>140</y>
+      <y>160</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -319,7 +319,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>140</y>
+      <y>160</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -355,6 +355,9 @@
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_hostel_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>170</x>
@@ -410,7 +413,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>180</y>
+      <y>200</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -423,7 +426,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>110</y>
+      <y>130</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -799,6 +802,32 @@
      <string>Фото</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="lineEdit_sex_2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>100</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>100</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>пол</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -806,7 +835,7 @@
      <x>0</x>
      <y>0</y>
      <width>1419</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
