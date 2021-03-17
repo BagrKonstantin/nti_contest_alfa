@@ -163,24 +163,24 @@ class Dialog(QMainWindow, Dialog_ui):
         self.lineEdit_direction.setText(str(data[33]))
         # фото достижение
 
-        self.user_photo_path = 'data/user_photos/' + data[11]
+        self.user_photo_path = 'user_photos/' + data[11]
         self.pixmap = QPixmap(self.user_photo_path)
         self.user_photo.setPixmap(self.pixmap)
 
 
-        self.first_page_path = 'data/passports/' + data[17]
+        self.first_page_path = 'passports/' + data[17]
         self.pixmap = QPixmap(self.user_photo_path)
         self.first_page.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'data/agreements/' + data[19]
+        self.user_photo_path = 'agreements/' + data[19]
         self.pixmap = QPixmap(self.user_photo_path)
         self.soglasie_na_zachislenie.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'data/attestats/' + data[21]
+        self.user_photo_path = 'attestats/' + data[21]
         self.pixmap = QPixmap(self.user_photo_path)
         self.document.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'data/achiev/' + data[28]
+        self.user_photo_path = 'achiev/' + data[28]
         self.pixmap = QPixmap(self.user_photo_path)
         self.personal_achiev.setPixmap(self.pixmap)
 
@@ -194,22 +194,22 @@ class Dialog(QMainWindow, Dialog_ui):
         self.pushButton_doc.clicked.connect(self.open3)
         self.pushButton_achiv.clicked.connect(self.open4)
 
-        self.data = ['user_photos/' + data[11], 'passports/' + data[17], 'agreements/' + data[19], 'attestats/' + data[21], 'achiev/' + data[28]]
+        self.data_file = ['user_photos/' + data[11], 'passports/' + data[17], 'agreements/' + data[19], 'attestats/' + data[21], 'achiev/' + data[28]]
 
     def open0(self):
         print(os.getcwd())
         try:
-            os.startfile(os.getcwd() + "/data/" + self.data[0])
+            os.startfile(os.getcwd() + "/" + self.data_file[0])
         except Exception as err:
             print(err)
     def open1(self):
-        os.startfile(os.getcwd() + "/data/" + self.data[1])
+        os.startfile(os.getcwd() + "/" +  self.data_file[1])
     def open2(self):
-        os.startfile(os.getcwd() + "/data/" + self.data[2])
+        os.startfile(os.getcwd() + "/" + self.data_file[2])
     def open3(self):
-        os.startfile(os.getcwd() + "/data/" + self.data[3])
+        os.startfile(os.getcwd() + "/" + self.data_file[3])
     def open4(self):
-        os.startfile(os.getcwd() + "/data/" + self.data[4])
+        os.startfile(os.getcwd() + "/" + self.data_file[4])
 
     def closeEvent(self, event):
         self.parent.setDisabled(False)
