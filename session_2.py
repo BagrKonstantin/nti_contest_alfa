@@ -22,6 +22,8 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.update_data()
         self.update_table()
         self.update_table2()
+        self.update_table3()
+        self.updata_table_4()
         self.tableWidget_2.cellClicked.connect(self.open_tab)
         self.comboBox.addItems(['', 'ПМ', 'ИВТ', 'АУТС', 'ИкТ', 'ЗСС'])
 
@@ -33,6 +35,48 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
 
         self.pushButton.clicked.connect(self.update_table2)
+
+    def updata_table_4(self):
+        try:
+            con = sqlite3.connect(self.path)
+            cur = con.cursor()
+            data = cur.execute(
+                """Select * from user where hostel = {}""".format(1)).fetchall()
+            con.close()
+            self.tableWidget_4.setRowCount(len(data))
+            print(data)
+
+            for i in range(len(data)):
+                self.tableWidget_4.setItem(i, 0, QTableWidgetItem())
+                self.tableWidget_4.setItem(i, 1, QTableWidgetItem())
+
+                self.tableWidget_4.item(i, 0).setText(str(data[i][1] + " " + data[i][2] + " " + data[i][3]))
+                if self.data[i][30] == 1:
+                    self.tableWidget_4.item(i, 1).setText(str('да'))
+                else:
+                    self.tableWidget_4.item(i, 1).setText(str('нет'))
+        except Exception as err:
+            print(err)
+
+    def update_table3(self):
+        self.tableWidget_3.setRowCount(len(self.data))
+
+        for i in range(len(self.data)):
+            self.tableWidget_3.setItem(i, 0, QTableWidgetItem())
+            self.tableWidget_3.setItem(i, 1, QTableWidgetItem())
+            self.tableWidget_3.setItem(i, 2, QTableWidgetItem())
+            self.tableWidget_3.setItem(i, 3, QTableWidgetItem())
+
+            self.tableWidget_3.item(i, 0).setText(str(self.data[i][1] + " " + self.data[i][2] + " " + self.data[i][3]))
+            self.tableWidget_3.item(i, 1).setText(str(self.data[i][23] + self.data[i][24] + self.data[i][25] + self.data[i][26]))
+            if self.data[i][29] == 1:
+                self.tableWidget_3.item(i, 2).setText('10')
+            else:
+                self.tableWidget_3.item(i, 2).setText('0')
+            if self.data[i][30] == 1:
+                self.tableWidget_3.item(i, 3).setText(str('да'))
+            else:
+                self.tableWidget_3.item(i, 3).setText(str('нет'))
 
     def update_table2(self):
         try:
@@ -51,12 +95,10 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
                 self.tableWidget.item(i, 0).setText(str(data[i][1] + " " + data[i][2] + " " + data[i][3]))
                 self.tableWidget.item(i, 1).setText(str(data[i][23] + data[i][24] + data[i][25] + data[i][26]))
-                print(1)
                 if data[i][29] == 1:
                     self.tableWidget.item(i, 2).setText('10')
                 else:
                     self.tableWidget.item(i, 2).setText('0')
-                print(2)
                 if data[i][30] == 1:
                     self.tableWidget.item(i, 3).setText(str('да'))
                 else:
