@@ -160,43 +160,37 @@ class Dialog(QMainWindow, Dialog_ui):
         self.parent.setDisabled(False)
 
     def send_message(self, email, message):
-
-        print(email, message)
-
         message = message.encode("utf-8")
-        print(message)
-        server = smtplib.SMTP_SSL("smtp.yandex.ru", 465)
-        server.login("costa.spy@yandex.ru",  "1")
-        server.sendmail("costa.spy@yandex.ru", email, message)
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login("mypubllicmail@gmail.com",  "aleks321245")
+        server.sendmail("mypubllicmail@gmail.com", email, message)
         server.quit()
-        print(11111111111111111111111111111111111111111111111111111)
 
 
 
     def back1(self):
-        self.close()
-        self.parent.setDisabled(False)
-    #
-    #     try:
-    #         if self.checkBox.isChecked() or self.checkBox_2.isChecked() or self.checkBox_3.isChecked() or self.checkBox_4.isChecked() or self.checkBox_5.isChecked() or self.checkBox_6.isChecked():
-    #             self.send_message(self.lineEdit_email_2.text(), """Добрый день!
-    # Уведомляем вас, что вы успешно подали документы в Сызранский государственный университет имени Филиппа Лимонадова. С этого момента вы участвуете в конкурсе на зачисление.
-    # С уважением,
-    # приемная комиссия СГУ им. Ф.Лимонадова""")
-    #             # изменение статуса на всё супер
-    #         else:
-    #             self.send_message(self.lineEdit_email_2.text(), """Добрый день!
-    # Уведомляем вас, что при подаче документов в Сызранский государственный университет имени Филиппа Лимонадова вы допустили ошибки.
-    # Просим исправить ошибки в ближайшее время.
-    # С уважением,
-    # приемная комиссия СГУ им. Ф.Лимонадова”""")
-    #             # изменение статуса на доработать
-    #         print(111111111111111111111111111111111111111111111111111111)
-    #         self.close()
-    #         self.parent.setDisabled(False)
-    #
-    #     except Exception as error:
-    #         print(error)
+
+        try:
+            if self.checkBox.isChecked() or self.checkBox_2.isChecked() or self.checkBox_3.isChecked() or self.checkBox_4.isChecked() or self.checkBox_5.isChecked() or self.checkBox_6.isChecked():
+                self.send_message(self.lineEdit_email_2.text(), """Добрый день!
+    Уведомляем вас, что вы успешно подали документы в Сызранский государственный университет имени Филиппа Лимонадова. С этого момента вы участвуете в конкурсе на зачисление.
+    С уважением,
+    приемная комиссия СГУ им. Ф.Лимонадова""")
+                # изменение статуса на всё супер
+            else:
+                self.send_message(self.lineEdit_email_2.text(), """Добрый день!
+    Уведомляем вас, что при подаче документов в Сызранский государственный университет имени Филиппа Лимонадова вы допустили ошибки.
+    Просим исправить ошибки в ближайшее время.
+    С уважением,
+    приемная комиссия СГУ им. Ф.Лимонадова”""")
+                # изменение статуса на доработать
+            print(111111111111111111111111111111111111111111111111111111)
+            self.close()
+            self.parent.setDisabled(False)
+
+        except Exception as error:
+            print(error)
 
 
 
