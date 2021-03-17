@@ -135,6 +135,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
     def update_table(self):
         try:
+            self.update_data()
             self.tableWidget_2.setRowCount(len(self.data))
             statuses = ['Новый', 'В работе', 'Комплект без оригинала', 'Полный комплект']
             stadias = ['Новый', 'На рассмотрении', 'Отправлено на доработку', 'Принято']
@@ -220,24 +221,24 @@ class Dialog(QMainWindow, Dialog_ui):
         # фото паспорт
         self.lineEdit_adress_2.setText(str(self.data[18]))
         # фото согласие
-        self.lineEdit_number_of_doc_frame_3.setText(str(self.dataself.data[20]))
+        self.lineEdit_number_of_doc_frame_3.setText(str(self.data[20]))
         # фото аттестат
-        self.lineEdit_teach_form.setText("бюджет" if self.dataself.data[22] else "платное")
-        self.lineEdit_rus_2.setText(str(self.dataself.data[23]))
-        self.lineEdit_math_2.setText(str(self.dataself.data[24]))
-        self.lineEdit_inf.setText(str(self.dataself.data[25]))
-        self.lineEdit_fizika.setText(str(self.dataself.data[26]))
-        self.lineEdit_achiev.setText(str(self.dataself.data[27]))
-        self.lineEdit_index_2.setText(str(self.dataself.data[34]))
-        self.lineEdit_direction.setText(str(self.dataself.data[33]))
+        self.lineEdit_teach_form.setText("бюджет" if self.data[22] else "платное")
+        self.lineEdit_rus_2.setText(str(self.data[23]))
+        self.lineEdit_math_2.setText(str(self.data[24]))
+        self.lineEdit_inf.setText(str(self.data[25]))
+        self.lineEdit_fizika.setText(str(self.data[26]))
+        self.lineEdit_achiev.setText(str(self.data[27]))
+        self.lineEdit_index_2.setText(str(self.data[34]))
+        self.lineEdit_direction.setText(str(self.data[33]))
         # фото достижение
 
-        self.user_photo_path = 'user_photos/' + self.dataself.data[11]
+        self.user_photo_path = 'user_photos/' + self.data[11]
         self.pixmap = QPixmap(self.user_photo_path)
         self.user_photo.setPixmap(self.pixmap)
 
 
-        self.first_page_path = 'passports/' + self.dataself.data[17]
+        self.first_page_path = 'passports/' + self.data[17]
         self.pixmap = QPixmap(self.user_photo_path)
         self.first_page.setPixmap(self.pixmap)
 
@@ -301,22 +302,32 @@ class Dialog(QMainWindow, Dialog_ui):
     С уважением,
     приемная комиссия СГУ им. Ф.Лимонадова""")
                 # изменение статуса на всё супер
-
+                con = sqlite3.connect(self.parent.path)
+                cur = con.cursor()
+                cur.execute("""update user set stadia = 2 where id_user = {}""".format(self.data[0]))
+                con.commit()
+                con.close()
             else:
                 self.send_message(self.lineEdit_email_2.text(), """Добрый день!
     Уведомляем вас, что при подаче документов в Сызранский государственный университет имени Филиппа Лимонадова вы допустили ошибки.
     Просим исправить ошибки в ближайшее время.
     С уважением,
     приемная комиссия СГУ им. Ф.Лимонадова”""")
+                con = sqlite3.connect(self.parent.path)
+                cur = con.cursor()
+                cur.execute("""update user set stadia = 3 where id_user = {}""".format(self.data[0]))
+                con.commit()
+                con.close()
                 # изменение статуса на доработать
             print(111111111111111111111111111111111111111111111111111111)
+            self.parent.update_table()
             self.close()
             self.parent.setDisabled(False)
 
+
+
         except Exception as error:
             print(error)
-
-
 
     def back(self):
         self.close()
