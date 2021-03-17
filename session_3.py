@@ -90,12 +90,22 @@ class Dialog(QMainWindow, Dialog_ui):
         self.setWindowTitle('Dialog')
 
         # doc = docx.Document()
-        # doc.add_paragraph('Это первая страница')
-        # doc.paragraphs[0].runs[0].add_break(docx.enum.text.WD_BREAK.PAGE)
-        # doc.add_paragraph('Это вторая страница')
         #
-        # doc.save('pages.docx')
-        # os.startfile('pages.docx')
+        # # добавляем первый параграф
+        # doc.add_paragraph('Здравствуй, мир!')
+        #
+        # # добавляем еще два параграфа
+        # par1 = doc.add_paragraph('Это второй абзац.')
+        # par2 = doc.add_paragraph('Это третий абзац.')
+        #
+        # # добавляем текст во второй параграф
+        # par1.add_run(' Этот текст был добавлен во второй абзац.')
+        #
+        # # добавляем текст в третий параграф
+        # par2.add_run(' Добавляем текст в третий абзац.').bold = True
+        #
+        # doc.save('helloworld.docx')
+        # os.startfile('helloworld.docx')
 
 
 
