@@ -7,7 +7,7 @@ from PyQt5.QtGui import QPixmap
 import time
 
 from PyQt5.QtWidgets import *
-
+import smtplib
 import sqlite3
 import smtplib
 import os
@@ -159,9 +159,30 @@ class Dialog(QMainWindow, Dialog_ui):
     def closeEvent(self, event):
         self.parent.setDisabled(False)
 
+    def send_message(email, message):
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login("mypubllicmail",  "aleks321245")
+        server.sendmail("limonadov44@gmail.com", email, message)
+        server.quit()
+
 
 
     def back(self):
+        if self.checkBox.isChecked() or self.checkBox_2.isChecked() or self.checkBox_3.isChecked() or self.checkBox_4.isChecked() or self.checkBox_5.isChecked() or self.checkBox_6.isChecked():
+            self.send_message(self.lineEdit_email_2.text(), """Добрый день!
+Уведомляем вас, что вы успешно подали документы в Сызранский государственный университет имени Филиппа Лимонадова. С этого момента вы участвуете в конкурсе на зачисление.
+С уважением,
+приемная комиссия СГУ им. Ф.Лимонадова""")
+            # изменение статуса на всё супер
+        else:
+            self.send_message(self.lineEdit_email_2.text(), """Добрый день!
+Уведомляем вас, что при подаче документов в Сызранский государственный университет имени Филиппа Лимонадова вы допустили ошибки. 
+Просим исправить ошибки в ближайшее время.
+С уважением,
+приемная комиссия СГУ им. Ф.Лимонадова”""")
+            # изменение статуса на доработать
+
         self.close()
         self.parent.setDisabled(False)
 

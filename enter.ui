@@ -49,7 +49,7 @@
    <widget class="QFrame" name="frame_reg">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>140</x>
       <y>90</y>
       <width>271</width>
       <height>391</height>
@@ -232,9 +232,9 @@
    <widget class="QFrame" name="frame_enter">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>110</y>
-      <width>271</width>
+      <x>140</x>
+      <y>60</y>
+      <width>331</width>
       <height>361</height>
      </rect>
     </property>
@@ -248,9 +248,9 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>150</y>
+       <y>142</y>
        <width>75</width>
-       <height>23</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
@@ -261,9 +261,9 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>90</y>
+       <y>77</y>
        <width>47</width>
-       <height>13</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
@@ -274,9 +274,9 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>90</y>
+       <y>79</y>
        <width>113</width>
-       <height>20</height>
+       <height>21</height>
       </rect>
      </property>
     </widget>
@@ -311,7 +311,7 @@
      <x>0</x>
      <y>0</y>
      <width>565</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
