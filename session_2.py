@@ -3,16 +3,18 @@ from top import Ui_MainWindow
 from work_with_app import Ui_MainWindow as Ui_MainWindow2
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtGui import QPixmap
 import time
 
 from PyQt5.QtWidgets import *
 
 import sqlite3
+import smtplib
 import os
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
-    def __init__(self, path, *args):
+    def __init__(self, path):
         super(UI_Task1, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('enter data')
@@ -47,8 +49,8 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 self.tableWidget_2.item(i, 1).setText("Мужской" if self.data[i][4] == 0 else "Женский")
                 self.tableWidget_2.item(i, 2).setText(str(self.data[i][5]))
                 self.tableWidget_2.item(i, 3).setText(str(self.data[i][8]))
-                self.tableWidget_2.item(i, 4).setText(str(statuses[self.data[i][-2]]))
-                self.tableWidget_2.item(i, 5).setText(str(stadias[self.data[i][-1]]))
+                self.tableWidget_2.item(i, 4).setText(str(statuses[self.data[i][-4]]))
+                self.tableWidget_2.item(i, 5).setText(str(stadias[self.data[i][-3]]))
         except Exception as err:
             print(err)
 
@@ -127,7 +129,27 @@ class Dialog(QMainWindow, Dialog_ui):
         self.lineEdit_inf.setText(str(data[25]))
         self.lineEdit_fizika.setText(str(data[26]))
         self.lineEdit_achiev.setText(str(data[27]))
+        self.lineEdit_index_2.setText(str(data[-1]))
+        self.lineEdit_direction.setText(str(data[-2]))
         # фото достижение
+
+        self.user_photo_path = 'user_photos/' + data[11]
+        self.pixmap = QPixmap(self.user_photo_path)
+        self.user_photo.setPixmap(self.pixmap)
+
+        self.first_page_path = 'passports/' + data[17]
+        self.pixmap = QPixmap(self.user_photo_path)
+        self.first_page.setPixmap(self.pixmap)
+
+        self.user_photo_path = 'attestats/' + data[21]
+        self.pixmap = QPixmap(self.user_photo_path)
+        self.document.setPixmap(self.pixmap)
+
+        self.user_photo_path = 'achiev/' + data[28]
+        self.pixmap = QPixmap(self.user_photo_path)
+        self.personal_achiev.setPixmap(self.pixmap)
+
+
 
 
 
@@ -151,8 +173,6 @@ class Dialog(QMainWindow, Dialog_ui):
     def back(self):
         self.close()
         self.parent.setDisabled(False)
-
-
 
 
 if __name__ == "__main__":
