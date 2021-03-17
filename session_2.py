@@ -30,7 +30,6 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
 
-
     def update_table(self):
         try:
             self.tableWidget_2.setRowCount(len(self.data))
@@ -45,23 +44,21 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 self.tableWidget_2.setItem(i, 3, QTableWidgetItem())
                 self.tableWidget_2.setItem(i, 4, QTableWidgetItem())
                 self.tableWidget_2.setItem(i, 5, QTableWidgetItem())
-                self.tableWidget_2.item(i, 0).setText(str(self.data[i][1] + " " + self.data[i][2] + " " + self.data[i][3]))
+                self.tableWidget_2.item(i, 0).setText(
+                    str(self.data[i][1] + " " + self.data[i][2] + " " + self.data[i][3]))
                 self.tableWidget_2.item(i, 1).setText("Мужской" if self.data[i][4] == 0 else "Женский")
                 self.tableWidget_2.item(i, 2).setText(str(self.data[i][5]))
                 self.tableWidget_2.item(i, 3).setText(str(self.data[i][8]))
-                self.tableWidget_2.item(i, 4).setText(str(statuses[self.data[i][-4]]))
-                self.tableWidget_2.item(i, 5).setText(str(stadias[self.data[i][-3]]))
+                self.tableWidget_2.item(i, 4).setText(str(statuses[self.data[i][-5]]))
+                self.tableWidget_2.item(i, 5).setText(str(stadias[self.data[i][-4]]))
         except Exception as err:
             print(err)
-
-
 
     def update_data(self):
         con = sqlite3.connect(self.path)
         cur = con.cursor()
         self.data = cur.execute("""Select * from user""").fetchall()
         con.close()
-
 
     def open_tab(self):
         msg = QMessageBox()
@@ -86,7 +83,6 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 print("no error")
             except Exception as error:
                 print(error)
-
 
 
 class Dialog(QMainWindow, Dialog_ui):
@@ -129,8 +125,8 @@ class Dialog(QMainWindow, Dialog_ui):
         self.lineEdit_inf.setText(str(data[25]))
         self.lineEdit_fizika.setText(str(data[26]))
         self.lineEdit_achiev.setText(str(data[27]))
-        self.lineEdit_index_2.setText(str(data[-1]))
-        self.lineEdit_direction.setText(str(data[-2]))
+        self.lineEdit_index_2.setText(str(data[34]))
+        self.lineEdit_direction.setText(str(data[33]))
         # фото достижение
 
         self.user_photo_path = 'user_photos/' + data[11]
@@ -149,10 +145,9 @@ class Dialog(QMainWindow, Dialog_ui):
         self.pixmap = QPixmap(self.user_photo_path)
         self.personal_achiev.setPixmap(self.pixmap)
 
-
-
-
-
+        self.user_photo_path = 'agreements/' + data[19]
+        self.pixmap = QPixmap(self.user_photo_path)
+        self.soglasie_na_zachislenie.setPixmap(self.pixmap)
 
         self.pushButton.clicked.connect(self.back1)
 
