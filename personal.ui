@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>470</y>
-      <width>131</width>
-      <height>16</height>
+      <y>465</y>
+      <width>351</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Неверные документы:</string>
+     <string>Отсутсвтующие или неправильнозаполненные документы:</string>
     </property>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget">
@@ -854,6 +854,84 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_user">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>340</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>просмотр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_first_page">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>220</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>просмотр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_doc">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>90</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>просмотр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_achiv">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>90</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>просмотр</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_sogl">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>260</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>просмотр</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_7">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>510</y>
+      <width>181</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Неверные Баллы за экзамены</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -861,7 +939,7 @@
      <x>0</x>
      <y>0</y>
      <width>1419</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
