@@ -27,6 +27,10 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.tableWidget_2.cellClicked.connect(self.open_tab)
         self.comboBox.addItems(['', 'ПМ', 'ИВТ', 'АУТС', 'ИкТ', 'ЗСС'])
 
+        self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableWidget_4.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableWidget_3.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget_2.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
@@ -195,57 +199,57 @@ class Dialog(QMainWindow, Dialog_ui):
         # for i, j in enumerate(args[0]):
         #     print(j, i)
 
-        data = args[0]
+        self.data = args[0]
 
-        self.lineEdit_name_2.setText(str(data[1]))
-        self.lineEdit_secondname_2.setText(str(data[2]))
-        self.lineEdit_surname_2.setText(str(data[3]))
-        self.lineEdit_sex_2.setText("Мужской" if data[4] == 0 else "Женский")
-        self.lineEdit_email_2.setText(str(data[5]))
+        self.lineEdit_name_2.setText(str(self.data[1]))
+        self.lineEdit_secondname_2.setText(str(self.data[2]))
+        self.lineEdit_surname_2.setText(str(self.data[3]))
+        self.lineEdit_sex_2.setText("Мужской" if self.data[4] == 0 else "Женский")
+        self.lineEdit_email_2.setText(str(self.data[5]))
         # password
-        self.lineEdit_birht_date_2.setText(str(data[7]))
-        self.lineEdit_phone_2.setText(str(data[8]))
-        self.lineEdit_place_birth_2.setText(str(data[9]))
-        self.radioButton_hostel_2.setChecked(True if data[10] else False)
+        self.lineEdit_birht_date_2.setText(str(self.data[7]))
+        self.lineEdit_phone_2.setText(str(self.data[8]))
+        self.lineEdit_place_birth_2.setText(str(self.data[9]))
+        self.radioButton_hostel_2.setChecked(True if self.data[10] else False)
         # фото
-        self.lineEdit_series_2.setText(str(data[12]))
-        self.lineEdit_pass_number_2.setText(str(data[13]))
-        self.lineEdit_given_by_2.setText(str(data[14]))
-        self.lineEdit_code_2.setText(str(data[15]))
-        self.lineEdit_given_date_2.setText(str(data[16]))
+        self.lineEdit_series_2.setText(str(self.data[12]))
+        self.lineEdit_pass_number_2.setText(str(self.data[13]))
+        self.lineEdit_given_by_2.setText(str(self.data[14]))
+        self.lineEdit_code_2.setText(str(self.data[15]))
+        self.lineEdit_given_date_2.setText(str(self.data[16]))
         # фото паспорт
-        self.lineEdit_adress_2.setText(str(data[18]))
+        self.lineEdit_adress_2.setText(str(self.data[18]))
         # фото согласие
-        self.lineEdit_number_of_doc_frame_3.setText(str(data[20]))
+        self.lineEdit_number_of_doc_frame_3.setText(str(self.dataself.data[20]))
         # фото аттестат
-        self.lineEdit_teach_form.setText("бюджет" if data[22] else "платное")
-        self.lineEdit_rus_2.setText(str(data[23]))
-        self.lineEdit_math_2.setText(str(data[24]))
-        self.lineEdit_inf.setText(str(data[25]))
-        self.lineEdit_fizika.setText(str(data[26]))
-        self.lineEdit_achiev.setText(str(data[27]))
-        self.lineEdit_index_2.setText(str(data[34]))
-        self.lineEdit_direction.setText(str(data[33]))
+        self.lineEdit_teach_form.setText("бюджет" if self.dataself.data[22] else "платное")
+        self.lineEdit_rus_2.setText(str(self.dataself.data[23]))
+        self.lineEdit_math_2.setText(str(self.dataself.data[24]))
+        self.lineEdit_inf.setText(str(self.dataself.data[25]))
+        self.lineEdit_fizika.setText(str(self.dataself.data[26]))
+        self.lineEdit_achiev.setText(str(self.dataself.data[27]))
+        self.lineEdit_index_2.setText(str(self.dataself.data[34]))
+        self.lineEdit_direction.setText(str(self.dataself.data[33]))
         # фото достижение
 
-        self.user_photo_path = 'user_photos/' + data[11]
+        self.user_photo_path = 'user_photos/' + self.dataself.data[11]
         self.pixmap = QPixmap(self.user_photo_path)
         self.user_photo.setPixmap(self.pixmap)
 
 
-        self.first_page_path = 'passports/' + data[17]
+        self.first_page_path = 'passports/' + self.dataself.data[17]
         self.pixmap = QPixmap(self.user_photo_path)
         self.first_page.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'agreements/' + data[19]
+        self.user_photo_path = 'agreements/' + self.data[19]
         self.pixmap = QPixmap(self.user_photo_path)
         self.soglasie_na_zachislenie.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'attestats/' + data[21]
+        self.user_photo_path = 'attestats/' + self.data[21]
         self.pixmap = QPixmap(self.user_photo_path)
         self.document.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'achiev/' + data[28]
+        self.user_photo_path = 'achiev/' + self.data[28]
         self.pixmap = QPixmap(self.user_photo_path)
         self.personal_achiev.setPixmap(self.pixmap)
 
@@ -259,7 +263,7 @@ class Dialog(QMainWindow, Dialog_ui):
         self.pushButton_doc.clicked.connect(self.open3)
         self.pushButton_achiv.clicked.connect(self.open4)
 
-        self.data_file = ['user_photos/' + data[11], 'passports/' + data[17], 'agreements/' + data[19], 'attestats/' + data[21], 'achiev/' + data[28]]
+        self.data_file = ['user_photos/' + self.data[11], 'passports/' + self.data[17], 'agreements/' + self.data[19], 'attestats/' + self.data[21], 'achiev/' + self.data[28]]
 
     def open0(self):
         print(os.getcwd())
@@ -290,7 +294,6 @@ class Dialog(QMainWindow, Dialog_ui):
 
 
     def back1(self):
-
         try:
             if self.checkBox.isChecked() or self.checkBox_2.isChecked() or self.checkBox_3.isChecked() or self.checkBox_4.isChecked() or self.checkBox_5.isChecked() or self.checkBox_6.isChecked() or self.checkBox_7.isChecked():
                 self.send_message(self.lineEdit_email_2.text(), """Добрый день!
@@ -298,6 +301,7 @@ class Dialog(QMainWindow, Dialog_ui):
     С уважением,
     приемная комиссия СГУ им. Ф.Лимонадова""")
                 # изменение статуса на всё супер
+
             else:
                 self.send_message(self.lineEdit_email_2.text(), """Добрый день!
     Уведомляем вас, что при подаче документов в Сызранский государственный университет имени Филиппа Лимонадова вы допустили ошибки.
