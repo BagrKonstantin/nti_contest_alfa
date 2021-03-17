@@ -205,8 +205,8 @@ class Dialog(QMainWindow, Dialog_ui):
         self.data = args[0]
 
         self.lineEdit_name_2.setText(str(self.data[1]))
-        self.lineEdit_secondname_2.setText(str(self.data[2]))
-        self.lineEdit_surname_2.setText(str(self.data[3]))
+        self.lineEdit_secondname_2.setText(str(self.data[3]))
+        self.lineEdit_surname_2.setText(str(self.data[2]))
         self.lineEdit_sex_2.setText("Мужской" if self.data[4] == 0 else "Женский")
         self.lineEdit_email_2.setText(str(self.data[5]))
         # password
@@ -235,25 +235,25 @@ class Dialog(QMainWindow, Dialog_ui):
         self.lineEdit_direction.setText(str(self.data[33]))
         # фото достижение
 
-        self.user_photo_path = 'user_photos/' + self.data[11]
-        self.pixmap = QPixmap(self.user_photo_path)
+        self.user_photo_path_1 = 'user_photos/' + self.data[11]
+        self.pixmap = QPixmap(self.user_photo_path_1)
         self.user_photo.setPixmap(self.pixmap)
 
 
-        self.first_page_path = 'passports/' + self.data[17]
-        self.pixmap = QPixmap(self.user_photo_path)
+        self.first_page_path_2 = 'passports/' + self.data[17]
+        self.pixmap = QPixmap(self.first_page_path_2)
         self.first_page.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'agreements/' + self.data[19]
-        self.pixmap = QPixmap(self.user_photo_path)
+        self.user_photo_path_3 = 'agreements/' + self.data[19]
+        self.pixmap = QPixmap(self.user_photo_path_3)
         self.soglasie_na_zachislenie.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'attestats/' + self.data[21]
-        self.pixmap = QPixmap(self.user_photo_path)
+        self.user_photo_path_4 = 'attestats/' + self.data[21]
+        self.pixmap = QPixmap(self.user_photo_path_4)
         self.document.setPixmap(self.pixmap)
 
-        self.user_photo_path = 'achiev/' + self.data[28]
-        self.pixmap = QPixmap(self.user_photo_path)
+        self.user_photo_path_5 = 'achiev/' + self.data[28]
+        self.pixmap = QPixmap(self.user_photo_path_5)
         self.personal_achiev.setPixmap(self.pixmap)
 
 
