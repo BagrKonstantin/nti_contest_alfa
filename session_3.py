@@ -14,7 +14,6 @@ import os
 import docx
 
 
-
 class UI_Task1(QMainWindow, Ui_MainWindow):
     def __init__(self, path):
         super(UI_Task1, self).__init__()

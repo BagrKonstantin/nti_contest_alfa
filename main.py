@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import QtWidgets, QtGui
 import time
 from session_2 import UI_Task1 as StaffUi
+from session_3 import UI_Task1 as DekanUi
 
 import sqlite3
 import shutil
@@ -276,9 +277,11 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             password = self.lineEdit_2.text()
             flag = False
             staff_flag = False
+            dekan_flag = False
             con = sqlite3.connect(self.path)
             cur = con.cursor()
             staff = cur.execute("""Select * from staff""").fetchall()
+            dekanat = cur.execute("""Select * from dekanat""").fetchall()
             con.close()
             for i in self.data:
                 if email in i and password in i:
@@ -288,12 +291,18 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 if email in i and password in i:
                     staff_flag = True
                     staff_user = i
+            for i in dekanat:
+                if email in i and password in i:
+                    dekanat_flag = True
             if flag:
                 mainWindow2 = UI_Task2(self, user)
                 mainWindow2.show()
             elif staff_flag:
                 self.mainWindow3 = StaffUi(self.path)
                 self.mainWindow3.show()
+            elif dekan_flag:
+                self.win = DekanUi(self.path)
+                self.win.show()
             else:
                 QMessageBox.information(self, 'Ошибка', "Неверный логин или пароль", QMessageBox.Ok)
         except Exception as err:
