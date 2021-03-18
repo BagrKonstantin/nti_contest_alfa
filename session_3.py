@@ -90,6 +90,9 @@ class Dialog(QMainWindow, Dialog_ui):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
+        self.pushButton_2.clicked.connect(self.print)
+        self.pushButton_3.clicked.connect(self.print2)
+
 
 
 
@@ -103,7 +106,7 @@ class Dialog(QMainWindow, Dialog_ui):
         # password
         self.lineEdit_birht_date_2.setText(str(self.data[7]))
         self.lineEdit_phone_2.setText(str(self.data[8]))
-        # self.lineEdit_place_birth_2.setText(str(self.data[9]))
+        self.lineEdit_place_birth_2.setText(str(self.data[9]))
         # self.radioButton_hostel_2.setChecked(True if self.data[10] else False)
         # фото
         self.lineEdit_series_2.setText(str(self.data[12]))
@@ -116,7 +119,7 @@ class Dialog(QMainWindow, Dialog_ui):
         # фото согласие
         self.lineEdit_number_of_doc_frame_3.setText(str(self.data[20]))
         # фото аттестат
-        # self.lineEdit_teach_form.setText("бюджет" if self.data[22] else "платное")
+        self.lineEdit_teach_form.setText("бюджет" if self.data[22] else "платное")
         # self.lineEdit_rus_2.setText(str(self.data[23]))
         # self.lineEdit_math_2.setText(str(self.data[24]))
         # self.lineEdit_inf.setText(str(self.data[25]))
@@ -163,6 +166,63 @@ class Dialog(QMainWindow, Dialog_ui):
     def back(self):
         self.close()
         self.parent.setDisabled(False)
+
+    def print2(self):
+        try:
+            doc = docxtpl.DocxTemplate("Формат зачетной книжки.docx")
+            context = {
+                "Факультет": self.lineEdit_direction_2.text(),
+                "Специальность": self.lineEdit_direction.text(),
+
+                "Ф": self.lineEdit_surname_2.text(),
+                "И": self.lineEdit_name_2.text(),
+                "О": self.lineEdit_secondname_2.text(),
+
+
+
+
+
+                "Номеркнижки": self.lineEdit_num_book.text(),
+
+            }
+            doc.render(context)
+            doc.save('Формат зачетной книжки.docx')
+
+            os.startfile(os.getcwd() + '/Формат зачетной книжки.docx')
+        except Exception as err:
+            print(err)
+
+    def print(self):
+        try:
+            doc = docxtpl.DocxTemplate("Формат личного дела.docx")
+            context = {
+                "Факультет": self.lineEdit_direction_2.text(),
+                "Специальность": self.lineEdit_direction.text(),
+                "Группа": self.lineEdit_group_num.text(),
+                "Основа": self.lineEdit_teach_form.text(),
+                "Номердела": "",
+                "Ф": self.lineEdit_surname_2.text(),
+                "И": self.lineEdit_name_2.text(),
+                "О": self.lineEdit_secondname_2.text(),
+                "Рождение": self.lineEdit_birht_date_2.text(),
+                "Место": self.lineEdit_place_birth_2.text(),
+
+                "Серия": self.lineEdit_series_2.text(),
+                "Номер": self.lineEdit_pass_number_2.text(),
+                "когдавыдан": self.lineEdit_given_date_2.text(),
+                "выданкем": self.lineEdit_given_by_2.text(),
+
+                "Телефон": self.lineEdit_phone_2.text(),
+                "mail": self.lineEdit_email_2.text(),
+                "адрес": self.lineEdit_adress_2.text(),
+
+            }
+            doc.render(context)
+            doc.save('Формат личного дела.docx')
+
+            os.startfile(os.getcwd() + '/Формат личного дела.docx')
+        except Exception as err:
+            print(err)
 
 
 if __name__ == "__main__":
