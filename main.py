@@ -27,12 +27,11 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.frame_first.hide()
         self.pushButton_change_data.clicked.connect(self.first_page)
 
-        self.pushButton_change_data.setEnabled(False)
 
-        self.lineEdit_surname.setText(user[10])
-        self.lineEdit_name.setText(user[9])
-        self.lineEdit_secondname.setText(user[11])
-        self.lineEdit_email.setText(user[2])
+        self.lineEdit_surname.setText(user[2])
+        self.lineEdit_name.setText(user[1])
+        self.lineEdit_secondname.setText(user[3])
+        self.lineEdit_email.setText(user[5])
 
         self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))
         self.lineEdit_pass_number.setValidator(QtGui.QIntValidator(0, 100000))

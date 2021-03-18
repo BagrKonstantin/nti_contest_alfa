@@ -10,8 +10,7 @@ import os
 
 import docxtpl
 
-
-# import pkg_resources.py2_warn
+#import pkg_resources.py2_warn
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
@@ -24,7 +23,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         print(self.user)
 
         self.tableWidget_5.cellClicked.connect(self.open_tab)
-        if self.user[0] == 0:
+        if self.user[3] == 0:
             self.comboBox_2.addItems(['', 'ПМ', 'ИВТ', 'АУТС'])
         else:
             self.comboBox_2.addItems(['', 'ИкТ', 'ЗСС'])
@@ -141,7 +140,8 @@ class Dialog(QMainWindow, Dialog_ui):
             print(self.data[41], self.data[17])
             self.lineEdit_adress_3.setReadOnly(True)
             self.lineEdit_adress_2.setReadOnly(True)
-
+        print(self.dekan)
+        print(self.data)
         if self.dekan[3] == 0:
             data = ['ПМ1', 'ПМ2', 'ИВТ1', 'ИВТ2', 'АУТС1', 'АУТС2']
             self.comboBox.addItems(data)
@@ -167,18 +167,7 @@ class Dialog(QMainWindow, Dialog_ui):
         # self.pushButton_user.clicked.connect(self.open0)
         # self.pushButton_first_page.clicked.connect(self.open1)
 
-        self.data_file = ['user_photos/' + self.data[11], 'passports/' + self.data[17], 'agreements/' + self.data[19],
-                          'attestats/' + self.data[21], 'achiev/' + self.data[28]]
 
-    def open0(self):
-        print(os.getcwd())
-        try:
-            os.startfile(os.getcwd() + "/" + self.data_file[0])
-        except Exception as err:
-            print(err)
-
-    def open1(self):
-        os.startfile(os.getcwd() + "/" + self.data_file[1])
 
     def closeEvent(self, event):
         self.parent.setDisabled(False)
@@ -208,6 +197,7 @@ class Dialog(QMainWindow, Dialog_ui):
 
     def print3(self):
         try:
+            print(self.dekan)
             doc = docxtpl.DocxTemplate("Формат студенческого билета.docx")
             context = {
                 "Факультет": self.lineEdit_direction_2.text(),
@@ -301,6 +291,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("bd.db", (1, 'ПупкинВС', 'ПупкинВасилий123', 1))
+    mainWindow = UI_Task1("bd.db", (1, 'ПупкинВС', 'ПупкинВасилий123', 1, "Пупкин Василий Эдуардович"))
     mainWindow.show()
     sys.exit(app.exec())
