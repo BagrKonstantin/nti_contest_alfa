@@ -102,6 +102,57 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.comboBox_achivements.addItems(["Олимпиада"])
         self.pushButton_change_pass.clicked.connect(self.change_pass)
 
+
+
+
+
+        self.lineEdit_email.setText(str(self.user[5]))
+        # password
+        self.lineEdit_birht_date.setText(str(self.user[7]))
+        self.lineEdit_phone.setText(str(self.user[8]))
+        self.lineEdit_place_birth.setText(str(self.user[9]))
+        self.radioButton_hostel.setChecked(True if self.user[10] else False)
+        # фото
+        self.lineEdit_series.setText(str(self.user[12]))
+        self.lineEdit_pass_number.setText(str(self.user[13]))
+        self.lineEdit_given_by.setText(str(self.user[14]))
+        self.lineEdit_code.setText(str(self.user[15]))
+        self.lineEdit_given_date.setText(str(self.user[16]))
+        # фото паспорт
+        self.lineEdit_adress.setText(str(self.user[18]))
+        # фото согласие
+        self.lineEdit_number_of_doc_frame_2.setText(str(self.user[20]))
+        # фото аттестат
+        #self.comboBox_form_of_edu.setCurrentIndex(0 if int(self.user[22]) else 1)
+        self.lineEdit_rus.setText(str(self.user[23]))
+        self.lineEdit_math.setText(str(self.user[24]))
+        self.lineEdit_IR_or_phys.setText(str(self.user[25]))
+        self.lineEdit_IR_or_phys.setText(str(self.user[26]))
+        #self.comboBox_achivements.setCurrentIndex(int(self.user[27]) if self.user[27] else 0)
+        self.lineEdit_index.setText(str(self.user[34]))
+        #self.comboBox_educ_way.setText(str(self.user[33]))
+        # фото достижение
+
+        # self.user_photo_path_1 = 'user_photos/' + self.user[11]
+        # self.pixmap = QPixmap(self.user_photo_path_1)
+        # self.user_photo.setPixmap(self.pixmap)
+        #
+        # self.first_page_path_2 = 'passports/' + self.user[17]
+        # self.pixmap = QPixmap(self.first_page_path_2)
+        # self.first_page.setPixmap(self.pixmap)
+        #
+        # self.user_photo_path_3 = 'agreements/' + self.user[19]
+        # self.pixmap = QPixmap(self.user_photo_path_3)
+        # self.soglasie_na_zachislenie.setPixmap(self.pixmap)
+        #
+        # self.user_photo_path_4 = 'attestats/' + self.user[21]
+        # self.pixmap = QPixmap(self.user_photo_path_4)
+        # self.document.setPixmap(self.pixmap)
+        #
+        # self.user_photo_path_5 = 'achiev/' + self.user[28]
+        # self.pixmap = QPixmap(self.user_photo_path_5)
+        # self.personal_achiev.setPixmap(self.pixmap)
+
     def change_pass(self):
         try:
             win = ChangePassWin(self, self.user)
