@@ -101,7 +101,7 @@ class Dialog(QMainWindow, Dialog_ui):
 
         self.pushButton_2.clicked.connect(self.print)
         self.pushButton_3.clicked.connect(self.print2)
-        # self.pushButton_4.clicked.connect(self.print3)
+        self.pushButton_4.clicked.connect(self.print3)
         self.data = args[0]
         self.dekan = args[1]
         print(self.data)
