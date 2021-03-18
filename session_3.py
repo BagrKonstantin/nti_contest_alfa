@@ -91,6 +91,7 @@ class Dialog(QMainWindow, Dialog_ui):
 
         self.pushButton_2.clicked.connect(self.print)
         self.pushButton_3.clicked.connect(self.print2)
+        self.pushButton_4.clicked.connect(self.print3)
 
 
 
@@ -167,6 +168,39 @@ class Dialog(QMainWindow, Dialog_ui):
         self.close()
         self.parent.setDisabled(False)
 
+    def print3(self):
+        try:
+            doc = docxtpl.DocxTemplate("Формат студенческого билета.docx")
+            context = {
+                "Факультет": self.lineEdit_direction_2.text(),
+                "Группа": self.lineEdit_group_num.text(),
+
+                "Ф": self.lineEdit_surname_2.text(),
+                "И": self.lineEdit_name_2.text(),
+                "О": self.lineEdit_secondname_2.text(),
+
+                "Номербилета": self.lineEdit_num_book.text(),
+                "year1": "2021",
+                "year2": "2022",
+                "year3": "2023",
+                "year4": "2024",
+                "year5": "2025",
+                "year6": "2026",
+                "level1": "1",
+                "level2": "2",
+                "level3": "3",
+                "level4": "4",
+                "level5": "5",
+                "level6": "6",
+
+            }
+            doc.render(context)
+            doc.save('Студенческий билет.docx')
+
+            os.startfile(os.getcwd() + '/Студенческий билет.docx')
+        except Exception as err:
+            print(err)
+
     def print2(self):
         try:
             doc = docxtpl.DocxTemplate("Формат зачетной книжки.docx")
@@ -186,9 +220,9 @@ class Dialog(QMainWindow, Dialog_ui):
 
             }
             doc.render(context)
-            doc.save('Формат зачетной книжки.docx')
+            doc.save('Зачётная книжка.docx')
 
-            os.startfile(os.getcwd() + '/Формат зачетной книжки.docx')
+            os.startfile(os.getcwd() + '/Зачётная книжка.docx')
         except Exception as err:
             print(err)
 
@@ -218,9 +252,9 @@ class Dialog(QMainWindow, Dialog_ui):
 
             }
             doc.render(context)
-            doc.save('Формат личного дела.docx')
+            doc.save('Личное дело.docx')
 
-            os.startfile(os.getcwd() + '/Формат личного дела.docx')
+            os.startfile(os.getcwd() + '/Личное дело.docx')
         except Exception as err:
             print(err)
 
