@@ -1,26 +1,17 @@
 from stud_card import Ui_MainWindow as Dialog_ui
 from decan_vision import Ui_MainWindow
-from work_with_app import Ui_MainWindow as Ui_MainWindow2
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtGui import QPixmap
 import time
-from email.mime.text import MIMEText
 from PyQt5.QtWidgets import *
-import smtplib
 import sqlite3
-import smtplib
 import os
-# from mako.template import Template
-# template = Template(filename='Формат личного дела.pdf')
-# output = Template.render(first_name='Simon', postcode='12345')
 
-from fpdf import FPDF
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font("Arial", size=12)
-pdf.cell(200, 10, txt="Welcome to Python!", ln=1, align="C")
-pdf.output("simple_demo.pdf")
+
+import docxtpl
+#from pkg_resources import py2_warn
+
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
