@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -64,6 +64,19 @@
        </property>
        <property name="text">
         <string>Добро пожаловать в личный Кабинет</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_change_pass">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>90</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Сменить пароль</string>
        </property>
       </widget>
      </widget>
@@ -959,7 +972,7 @@
      <x>0</x>
      <y>0</y>
      <width>1005</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

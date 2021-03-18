@@ -1,17 +1,49 @@
 from enter import Ui_MainWindow
 from work_with_app import Ui_MainWindow as Ui_MainWindow2
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QDialog
 from PyQt5 import QtWidgets, QtGui
 import time
 from session_2 import UI_Task1 as StaffUi
 from session_3 import UI_Task1 as DekanUi
+from change_pass import Ui_Form
 
 import sqlite3
 import shutil
 import os
 import docxtpl
 
-#import pkg_resources.py2_warn
+
+# import pkg_resources.py2_warn
+
+
+class ChangePassWin(QDialog, Ui_Form):
+    def __init__(self, parent=None, *args):
+        parent.setDisabled(True)
+        super(ChangePassWin, self).__init__(parent)
+        self.setupUi(self)
+        self.setWindowTitle("Dialog")
+        print(args)
+        self.user = args[0]
+
+        self.pushButton.clicked.connect(self.submit)
+
+    def submit(self):
+        try:
+            if self.user[5] == self.lineEdit_login.text() and self.user[6] == self.lineEdit_old_pass.text():
+                if self.lineEdit_new_pass.text() == self.lineEdit_submit_pass.text():
+                    con = sqlite3.connect("bd.db")
+                    cur = con.cursor()
+                    cur.execute("""Update user set password = "{}" where id_user = {}""".format(self.lineEdit_new_pass.text(),
+                                                                                                self.user[0]))
+                    con.commit()
+                    con.close()
+                    self.close()
+                else:
+                    QMessageBox.critical(self, "Ошибка", "Пароли не совпадают", QMessageBox.Ok)
+            else:
+                QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        except Exception as err:
+            print(err)
 
 
 class UI_Task2(QMainWindow, Ui_MainWindow2):
@@ -22,22 +54,23 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
+        self.user = args[0]
+        print(self.user)
 
-        user = args[0]
-        print(user)
+        if self.user[32] == 3:
 
-        if user[32] == 3:
-
-            self.label_29.setText("Добро пожаловать в личный кабинет студента, \n{} {} {}".format(user[2], user[1], user[3]))
+            self.label_29.setText(
+                "Добро пожаловать в личный кабинет студента, \n{} {} {}".format(self.user[2], self.user[1],
+                                                                                self.user[3]))
         else:
-            self.label_29.setText("Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(user[2], user[1], user[3]))
+            self.label_29.setText(
+                "Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(self.user[2], self.user[1],
+                                                                                   self.user[3]))
 
-
-
-        self.lineEdit_surname.setText(user[2])
-        self.lineEdit_name.setText(user[1])
-        self.lineEdit_secondname.setText(user[3])
-        self.lineEdit_email.setText(user[5])
+        self.lineEdit_surname.setText(self.user[2])
+        self.lineEdit_name.setText(self.user[1])
+        self.lineEdit_secondname.setText(self.user[3])
+        self.lineEdit_email.setText(self.user[5])
 
         self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))
         self.lineEdit_pass_number.setValidator(QtGui.QIntValidator(0, 100000))
@@ -59,6 +92,14 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.comboBox_educ_way.addItems(["Информационных технологий", "Сети и системы связи"])
 
         self.comboBox_achivements.addItems(["Олимпиада"])
+        self.pushButton_change_pass.clicked.connect(self.change_pass)
+
+    def change_pass(self):
+        try:
+            win = ChangePassWin(self, self.user)
+            win.show()
+        except Exception as err:
+            print(err)
 
     def check_second(self):
 
@@ -190,8 +231,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
     def commit(self):
 
-
-
         self.frame_second.hide()
         self.frame_greeting.show()
 
@@ -287,14 +326,14 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             dekanat = cur.execute("""Select * from dekanat""").fetchall()
             con.close()
             for i in self.data:
-                if email in i and password in i:
+                if email == i[5] and password == i[6]:
                     flag = True
                     user = i
             for i in staff:
-                if email in i and password in i:
+                if email == i[1] and password == i[2]:
                     staff_flag = True
             for i in dekanat:
-                if email in i and password in i:
+                if email == i[1] and password == i[2]:
                     dekanat_flag = True
                     user = i
             if flag:
