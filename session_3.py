@@ -9,7 +9,9 @@ import sqlite3
 import os
 
 import docxtpl
-#import pkg_resources.py2_warn
+
+
+# import pkg_resources.py2_warn
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
@@ -74,11 +76,19 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             try:
                 print(self.data)
                 print(self.tableWidget_5.currentRow())
+                self.update_data()
                 dialog = Dialog(self, self.data[self.tableWidget_5.currentRow()], self.user)
                 dialog.show()
+
                 print("no error")
             except Exception as error:
                 print(error)
+
+    def update_data(self):
+        con = sqlite3.connect(self.path)
+        cur = con.cursor()
+        self.data = cur.execute("""Select * from user""").fetchall()
+        con.close()
 
 
 class Dialog(QMainWindow, Dialog_ui):
@@ -174,10 +184,27 @@ class Dialog(QMainWindow, Dialog_ui):
         self.parent.setDisabled(False)
 
     def back(self):
-        data = [self.lineEdit_phone_2.text(), self.lineEdit_email_2.text(), self.lineEdit_adress_2.text(),
-                self.lineEdit_adress_3.text()]
-        self.close()
-        self.parent.setDisabled(False)
+        try:
+            data = [self.lineEdit_phone_2.text(), self.lineEdit_email_2.text(), self.lineEdit_adress_2.text(),
+                    self.lineEdit_adress_3.text(), self.comboBox.currentText(), self.lineEdit_series_2.text(),
+                    self.lineEdit_pass_number_2.text(), self.lineEdit_given_by_2.text(), self.lineEdit_code_2.text(),
+                    self.lineEdit_given_date_2.text(), self.lineEdit_read_ticket.text()]
+
+            con = sqlite3.connect(self.parent.path)
+            cur = con.cursor()
+            print(self.data[0])
+            a = ("""update user set 
+                (telephone, email, address, adress_living, user_gorup,
+                 passport_seria, passport_number, passport_kem_vidan, passport_kod_podrazdelenia, passport_date, read_ticket) = (
+                 "{}", "{}", "{}", "{}", "{}", {}, {}, "{}", "{}", "{}", {}) where id_user = {}""".format(*data, int(
+                    self.data[0])))
+            cur.execute(a)
+            con.commit()
+            con.close()
+            self.close()
+            self.parent.setDisabled(False)
+        except Exception as err:
+            print(err)
 
     def print3(self):
         try:
