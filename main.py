@@ -277,7 +277,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             password = self.lineEdit_2.text()
             flag = False
             staff_flag = False
-            dekan_flag = False
+            dekanat_flag = False
             con = sqlite3.connect(self.path)
             cur = con.cursor()
             staff = cur.execute("""Select * from staff""").fetchall()
@@ -290,18 +290,18 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             for i in staff:
                 if email in i and password in i:
                     staff_flag = True
-                    staff_user = i
             for i in dekanat:
                 if email in i and password in i:
                     dekanat_flag = True
+                    user = i
             if flag:
                 mainWindow2 = UI_Task2(self, user)
                 mainWindow2.show()
             elif staff_flag:
                 self.mainWindow3 = StaffUi(self.path)
                 self.mainWindow3.show()
-            elif dekan_flag:
-                self.win = DekanUi(self.path)
+            elif dekanat_flag:
+                self.win = DekanUi(self.path, user)
                 self.win.show()
             else:
                 QMessageBox.information(self, 'Ошибка', "Неверный логин или пароль", QMessageBox.Ok)

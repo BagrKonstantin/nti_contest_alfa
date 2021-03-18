@@ -182,7 +182,6 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         if msg.clickedButton() == ok_button:
             print("opendialog")
             try:
-                print(self.tableWidget_2.verticalHeader().sortIndicatorSection())
                 dialog = Dialog(self, self.data[self.tableWidget_2.verticalHeader().sortIndicatorSection() - 1])
                 dialog.show()
                 print("no error")

@@ -13,21 +13,24 @@ import docxtpl
 #from pkg_resources import py2_warn
 
 
-
 class UI_Task1(QMainWindow, Ui_MainWindow):
-    def __init__(self, path):
+    def __init__(self, path, *args):
         super(UI_Task1, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('enter data')
         self.path = path
+        self.user = args[0]
+        print(self.user)
 
         self.tableWidget_5.cellClicked.connect(self.open_tab)
-        self.comboBox_2.addItems(['', 'ПМ', 'ИВТ', 'АУТС', 'ИкТ', 'ЗСС'])
+        if self.user[0] == 0:
+            self.comboBox_2.addItems(['', 'ПМ', 'ИВТ', 'АУТС'])
+        else:
+            self.comboBox_2.addItems(['', 'ИкТ', 'ЗСС'])
 
         self.pushButton_2.clicked.connect(self.update_table2)
         self.tableWidget_5.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.update_data()
-
 
 
     def update_table2(self):
@@ -72,8 +75,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         if msg.clickedButton() == ok_button:
             print("opendialog")
             try:
-                print(self.tableWidget_5.verticalHeader().sortIndicatorSection())
-                dialog = Dialog(self, self.data[self.tableWidget_5.verticalHeader().sortIndicatorSection() - 1])
+                dialog = Dialog(self, self.data[self.tableWidget_5.horizontalHeader().sortIndicatorSection() - 1])
                 dialog.show()
                 print("no error")
             except Exception as error:
@@ -93,7 +95,6 @@ class Dialog(QMainWindow, Dialog_ui):
 
 
         self.data = args[0]
-
         self.lineEdit_name_2.setText(str(self.data[1]))
         self.lineEdit_secondname_2.setText(str(self.data[3]))
         self.lineEdit_surname_2.setText(str(self.data[2]))
@@ -168,6 +169,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("bd.db")
+    mainWindow = UI_Task1("bd.db", (1, 'ПупкинВС', 'ПупкинВасилий123', 1))
     mainWindow.show()
     sys.exit(app.exec())
