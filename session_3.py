@@ -72,7 +72,9 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         if msg.clickedButton() == ok_button:
             print("opendialog")
             try:
-                dialog = Dialog(self, self.data[self.tableWidget_5.currentRow()])
+                print(self.data)
+                print(self.tableWidget_5.currentRow())
+                dialog = Dialog(self, self.data[self.tableWidget_5.currentRow()], self.user)
                 dialog.show()
                 print("no error")
             except Exception as error:
@@ -90,7 +92,6 @@ class Dialog(QMainWindow, Dialog_ui):
         self.pushButton_2.clicked.connect(self.print)
         self.pushButton_3.clicked.connect(self.print2)
         # self.pushButton_4.clicked.connect(self.print3)
-
         self.data = args[0]
         self.dekan = args[1]
         print(self.data)
@@ -132,11 +133,12 @@ class Dialog(QMainWindow, Dialog_ui):
             self.lineEdit_adress_2.setReadOnly(True)
 
         if self.dekan[3] == 0:
-            data = ['', 'ПМ1', 'ПМ2', 'ИВТ1', 'ИВТ2', 'АУТС1', 'АУТС2']
+            data = ['ПМ1', 'ПМ2', 'ИВТ1', 'ИВТ2', 'АУТС1', 'АУТС2']
             self.comboBox.addItems(data)
             self.comboBox.setCurrentIndex(data.index(self.data[35]))
         else:
-            data = ['', 'ИкТ1', 'ИкТ2', 'ИкТ3', 'ЗСС1', 'ЗСС2', 'ЗСС3']
+            data = ['ИкТ1', 'ИкТ2', 'ИкТ3', 'ЗСС1', 'ЗСС2', 'ЗСС3']
+
             self.comboBox.addItems(data)
             self.comboBox.setCurrentIndex(data.index(self.data[35]))
 

@@ -127,7 +127,7 @@ class Ui_MainWindow(object):
         self.label_49.setObjectName("label_49")
         self.lineEdit_email_2 = QtWidgets.QLineEdit(self.tab_2)
         self.lineEdit_email_2.setGeometry(QtCore.QRect(112, 30, 171, 20))
-        self.lineEdit_email_2.setReadOnly(True)
+        self.lineEdit_email_2.setReadOnly(False)
         self.lineEdit_email_2.setObjectName("lineEdit_email_2")
         self.lineEdit_adress_2 = QtWidgets.QLineEdit(self.tab_2)
         self.lineEdit_adress_2.setGeometry(QtCore.QRect(90, 170, 331, 20))
@@ -231,7 +231,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
