@@ -9,7 +9,9 @@ from session_3 import UI_Task1 as DekanUi
 import sqlite3
 import shutil
 import os
+import docxtpl
 
+#import pkg_resources.py2_warn
 
 
 class UI_Task2(QMainWindow, Ui_MainWindow2):
@@ -20,12 +22,16 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.setupUi(self)
         self.setWindowTitle('Dialog')
 
+
         user = args[0]
         print(user)
 
-        self.frame_second.hide()
-        self.frame_first.hide()
-        self.pushButton_change_data.clicked.connect(self.first_page)
+        if user[32] == 3:
+
+            self.label_29.setText("Добро пожаловать в личный кабинет студента, \n{} {} {}".format(user[2], user[1], user[3]))
+        else:
+            self.label_29.setText("Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(user[2], user[1], user[3]))
+
 
 
         self.lineEdit_surname.setText(user[2])
@@ -42,9 +48,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.lineEdit_given_date.setInputMask("##-##-####")
         self.lineEdit_birht_date.setInputMask("##-##-####")
 
-        self.pushButton_next.clicked.connect(self.next_page)
-        self.pushButton_back.clicked.connect(self.prev_page)
-        self.pushButton_commit.clicked.connect(self.commit)
+        self.pushButton_save_1
+        self.pushButton_save_2
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
@@ -70,33 +75,32 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         return True
 
     def printf_2(self):
-        pass
-        # try:
-        #     if self.check_second():
-        #         # try:
-        #         #     doc = docxtpl.DocxTemplate("шаблон.docx")
-        #         #     context = {
-        #         #         "Имя": self.lineEdit_name.text(),
-        #         #         "Фамилия": self.lineEdit_surname.text(),
-        #         #         "Отчество": self.lineEdit_secondname.text(),
-        #         #         "Серия": self.lineEdit_series.text(),
-        #         #         "Номер": self.lineEdit_pass_number.text(),
-        #         #         "Дата": self.lineEdit_given_date.text(),
-        #         #         "Выданкем": self.lineEdit_given_by.text(),
-        #         #         "Специальность": self.comboBox_educ_way.currentText(),
-        #         #         "Формаобуч": self.comboBox_form_of_edu.currentText(),
-        #         #
-        #         #     }
-        #         #     doc.render(context)
-        #         #     doc.save('Заявление о зачислении.docx')
-        #         #
-        #         #     os.startfile('Заявление о зачислении.docx')
-        #         # except Exception as error:
-        #         #     print(error)
-        #     else:
-        #         QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
-        # except Exception as error:
-        #     print(error)
+        try:
+            if self.check_second():
+                try:
+                    doc = docxtpl.DocxTemplate("шаблон.docx")
+                    context = {
+                        "Имя": self.lineEdit_name.text(),
+                        "Фамилия": self.lineEdit_surname.text(),
+                        "Отчество": self.lineEdit_secondname.text(),
+                        "Серия": self.lineEdit_series.text(),
+                        "Номер": self.lineEdit_pass_number.text(),
+                        "Дата": self.lineEdit_given_date.text(),
+                        "Выданкем": self.lineEdit_given_by.text(),
+                        "Специальность": self.comboBox_educ_way.currentText(),
+                        "Формаобуч": self.comboBox_form_of_edu.currentText(),
+
+                    }
+                    doc.render(context)
+                    doc.save('Заявление о зачислении.docx')
+
+                    os.startfile('Заявление о зачислении.docx')
+                except Exception as error:
+                    print(error)
+            else:
+                QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        except Exception as error:
+            print(error)
 
     def check_first(self):
         if self.lineEdit_surname.text().isalpha():
@@ -160,29 +164,29 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
     def printf(self):
         pass
-        # # проверка валидности и распечатка
-        # try:
-        #     if self.check_first():
-        #         doc = docxtpl.DocxTemplate("data/шаблон1.docx")
-        #         context = {
-        #             "Имя": self.lineEdit_name.text(),
-        #             "Фамилия": self.lineEdit_surname.text(),
-        #             "Отчество": self.lineEdit_secondname.text(),
-        #             "Серия": self.lineEdit_series.text(),
-        #             "Номер": self.lineEdit_pass_number.text(),
-        #             "Дата": self.lineEdit_given_date.text(),
-        #
-        #         }
-        #         doc.render(context)
-        #         doc.save('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
-        #
-        #         os.startfile('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
-        #
-        #
-        #     else:
-        #         QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
-        # except Exception as error:
-        #     print(error)
+        # проверка валидности и распечатка
+        try:
+            if self.check_first():
+                doc = docxtpl.DocxTemplate("шаблон1.docx")
+                context = {
+                    "Имя": self.lineEdit_name.text(),
+                    "Фамилия": self.lineEdit_surname.text(),
+                    "Отчество": self.lineEdit_secondname.text(),
+                    "Серия": self.lineEdit_series.text(),
+                    "Номер": self.lineEdit_pass_number.text(),
+                    "Дата": self.lineEdit_given_date.text(),
+
+                }
+                doc.render(context)
+                doc.save('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
+
+                os.startfile('СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ.docx')
+
+
+            else:
+                QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        except Exception as error:
+            print(error)
 
     def commit(self):
 
