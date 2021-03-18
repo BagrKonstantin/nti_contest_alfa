@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -170,7 +170,7 @@
         <rect>
          <x>20</x>
          <y>10</y>
-         <width>651</width>
+         <width>711</width>
          <height>381</height>
         </rect>
        </property>
@@ -712,7 +712,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Информатика/физика</string>
+         <string>Информатика</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_select_photo_doc_frame2">
@@ -754,7 +754,7 @@
        <widget class="QLineEdit" name="lineEdit_IR_or_phys">
         <property name="geometry">
          <rect>
-          <x>130</x>
+          <x>120</x>
           <y>280</y>
           <width>113</width>
           <height>20</height>
@@ -961,6 +961,29 @@
          <string>Фото/скан</string>
         </property>
        </widget>
+      </widget>
+      <widget class="QLabel" name="label_30">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>320</y>
+         <width>55</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Физика</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_fiz_ege">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>320</y>
+         <width>113</width>
+         <height>22</height>
+        </rect>
+       </property>
       </widget>
      </widget>
     </widget>

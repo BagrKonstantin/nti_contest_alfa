@@ -33,8 +33,9 @@ class ChangePassWin(QDialog, Ui_Form):
                 if self.lineEdit_new_pass.text() == self.lineEdit_submit_pass.text():
                     con = sqlite3.connect("bd.db")
                     cur = con.cursor()
-                    cur.execute("""Update user set password = "{}" where id_user = {}""".format(self.lineEdit_new_pass.text(),
-                                                                                                self.user[0]))
+                    cur.execute(
+                        """Update user set password = "{}" where id_user = {}""".format(self.lineEdit_new_pass.text(),
+                                                                                        self.user[0]))
                     con.commit()
                     con.close()
                     self.close()
@@ -58,7 +59,9 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         print(self.user)
 
         if self.user[32] == 3:
-            self.label_29.setText("Добро пожаловать в личный кабинет студента, \n{} {} {}".format(self.user[2], self.user[1], self.user[3]))
+            self.label_29.setText(
+                "Добро пожаловать в личный кабинет студента, \n{} {} {}".format(self.user[2], self.user[1],
+                                                                                self.user[3]))
             self.tabWidget.setTabEnabled(1, False)
             self.tabWidget.setTabEnabled(2, False)
         else:
@@ -80,10 +83,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.lineEdit_given_date.setInputMask("##-##-####")
         self.lineEdit_birht_date.setInputMask("##-##-####")
 
-
-
-        self.pushButton_save_1
-        self.pushButton_save_2
+        self.pushButton_save_1.clicked.connect(self.save_page_1)
+        self.pushButton_save_2.clicked.connect(self.save_page_2)
 
         self.pushButton_recieve_agr.clicked.connect(self.printf)
 
@@ -230,14 +231,48 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         except Exception as error:
             print(error)
 
-    def commit(self):
+    def save_page_1(self):
+        try:
+            data = [self.lineEdit_name.text(), self.lineEdit_surname.text(), self.lineEdit_secondname.text(),
+                    self.lineEdit_email.text(), self.lineEdit_birht_date.text(), self.lineEdit_phone.text(),
+                    self.lineEdit_place_birth.text(), self.radioButton_hostel.isChecked(), self.lineEdit_photo.text(),
+                    self.lineEdit_series.text(), self.lineEdit_pass_number.text(), self.lineEdit_given_by.text(),
+                    self.lineEdit_code.text(), self.lineEdit_given_date.text(), self.lineEdit_photo_passport.text(),
+                    self.lineEdit_index.text(), self.lineEdit_adress.text(), self.lineEdit_agreement.text()]
 
+            con = sqlite3.connect("bd.db")
+            cur = con.cursor()
+            cur.execute("""update user set (user_name, user_surname, user_secondname,
+                                        email, birthday, telephone, birthplace,
+                                            hostel, user_photo, passport_seria,
+                                             passport_number, passport_kem_vidan, passport_kod_podrazdelenia,
+                                              passport_date, passport_photo, pochta_index, adress_living, agreement) =
+                                               ("{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}") where id_user = {}""".format(
+                *data, self.user[0]))
+            con.commit()
+            con.close()
+        except Exception as err:
+            print(err)
 
+    def save_page_2(self):
+        try:
+            data = [self.lineEdit_number_of_doc_frame_2.text(), self.lineEdit_select_photo_of_doc.text(), self.comboBox_form_of_edu.currentText(),
+                    self.comboBox_educ_way.currentText(), self.lineEdit_math.text(), self.lineEdit_rus.text(), self.lineEdit_IR_or_phys.text(),
+                    self.lineEdit_fiz_ege.text(),
+                    self.comboBox_achivements.currentText(), self.lineEdit_achivement_photo.text(), self.comboBox_educ_way.isEnabled(),
+                    self.pushButton_zayvlenie.text()]
 
-        self.frame_second.hide()
-        self.frame_greeting.show()
-
-        # все данные первой страницы проверены и готовы
+            con = sqlite3.connect("bd.db")
+            cur = con.cursor()
+            cur.execute("""update user set (attestat_number, attestat_photo, form_of_education, napravlenie,
+                                            ege_mat, ege_rus, ege_inf, ege_fis, achiev_title, achiev_photo, 
+                                            document_original, agreement) = ("{}", "{}", "{}", "{}", "{}", "{}", "{}", 
+                                            "{}", "{}", "{}", "{}", "{}") where id_user = {}""".format(*data, self.user[0]))
+            con.commit()
+            con.close()
+            print('xxxx')
+        except Exception as err:
+            print(err)
 
     def first_page(self):
         self.frame_greeting.hide()
