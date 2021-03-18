@@ -137,7 +137,7 @@
      <widget class="QLineEdit" name="lineEdit_birht_date_2">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>190</x>
         <y>170</y>
         <width>113</width>
         <height>20</height>
@@ -165,7 +165,7 @@
        <rect>
         <x>20</x>
         <y>170</y>
-        <width>151</width>
+        <width>171</width>
         <height>20</height>
        </rect>
       </property>
@@ -373,12 +373,22 @@
        <rect>
         <x>20</x>
         <y>150</y>
-        <width>91</width>
+        <width>111</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
        <string>год поступления</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_god_postyplenia">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>140</y>
+        <width>113</width>
+        <height>22</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -639,19 +649,6 @@
        <string>Дата отчисления</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_group_num">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>160</y>
-        <width>113</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="lineEdit_num_book">
       <property name="geometry">
        <rect>
@@ -696,6 +693,16 @@
       </property>
       <property name="readOnly">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>150</y>
+        <width>73</width>
+        <height>22</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -767,19 +774,6 @@
     </property>
     <property name="text">
      <string>Распечатать зачетную книжку</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>530</y>
-      <width>191</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Распечатать Студенческий билет</string>
     </property>
    </widget>
   </widget>

@@ -8,9 +8,10 @@ from PyQt5.QtWidgets import *
 import sqlite3
 import os
 
-
 import docxtpl
-#from pkg_resources import py2_warn
+
+
+# from pkg_resources import py2_warn
 
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
@@ -32,12 +33,12 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.tableWidget_5.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.update_data()
 
-
     def update_table2(self):
         try:
             con = sqlite3.connect(self.path)
             cur = con.cursor()
-            data = cur.execute("""Select * from user where napravlenie = '{}'""".format(self.comboBox_2.currentText())).fetchall()
+            data = cur.execute(
+                """Select * from user where napravlenie = '{}'""".format(self.comboBox_2.currentText())).fetchall()
             con.close()
             self.tableWidget_5.setRowCount(len(data))
             for i in range(len(data)):
@@ -49,8 +50,6 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
         except Exception as err:
             print(err)
-
-
 
     def update_data(self):
         con = sqlite3.connect(self.path)
@@ -75,7 +74,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         if msg.clickedButton() == ok_button:
             print("opendialog")
             try:
-                dialog = Dialog(self, self.data[self.tableWidget_5.horizontalHeader().sortIndicatorSection() - 1])
+                dialog = Dialog(self, self.data[self.tableWidget_5.horizontalHeader().sortIndicatorSection() - 1], self.user)
                 dialog.show()
                 print("no error")
             except Exception as error:
@@ -92,13 +91,10 @@ class Dialog(QMainWindow, Dialog_ui):
 
         self.pushButton_2.clicked.connect(self.print)
         self.pushButton_3.clicked.connect(self.print2)
-        self.pushButton_4.clicked.connect(self.print3)
-
-
-
-
+        # self.pushButton_4.clicked.connect(self.print3)
 
         self.data = args[0]
+        self.dekan = args[1]
         print(self.data)
         self.lineEdit_name_2.setText(str(self.data[1]))
         self.lineEdit_secondname_2.setText(str(self.data[3]))
@@ -124,11 +120,27 @@ class Dialog(QMainWindow, Dialog_ui):
         self.lineEdit_teach_form.setText("бюджет" if self.data[22] else "платное")
         self.lineEdit_direction.setText(str(self.data[33]))
         self.lineEdit_direction_2.setText(str(self.data[36]))
-        self.lineEdit_group_num.setText(str(self.data[35]))
+        # self.lineEdit_group_num.setText(str(self.data[35]))
         self.lineEdit_num_book.setText(str(self.data[37]))
         self.lineEdit_read_ticket.setText(str(self.data[38]))
         self.lineEdit_date_zachis.setText(str(self.data[39]))
         self.lineEdit_date_otchis.setText(str(self.data[40]))
+        self.lineEdit_adress_3.setText(str(self.data[41]))
+        self.lineEdit_god_postyplenia.setText(str(self.data[42]))
+
+        if self.lineEdit_adress_3.text() == self.lineEdit_adress_2.text():
+            print(self.data[41], self.data[17])
+            self.lineEdit_adress_3.setReadOnly(True)
+            self.lineEdit_adress_2.setReadOnly(True)
+
+        if self.dekan[3] == 0:
+            data = ['', 'ПМ1', 'ПМ2', 'ИВТ1', 'ИВТ2', 'АУТС1', 'АУТС2']
+            self.comboBox.addItems(data)
+            self.comboBox.setCurrentIndex(data.index(self.data[35]))
+        else:
+            data = ['', 'ИкТ1', 'ИкТ2', 'ИкТ3', 'ЗСС1', 'ЗСС2', 'ЗСС3']
+            self.comboBox.addItems(data)
+            self.comboBox.setCurrentIndex(data.index(self.data[35]))
 
         # фото достижение
 
@@ -136,21 +148,17 @@ class Dialog(QMainWindow, Dialog_ui):
         self.pixmap = QPixmap(self.user_photo_path_1)
         self.user_photo.setPixmap(self.pixmap)
 
-
         self.first_page_path_2 = 'passports/' + self.data[17]
         self.pixmap = QPixmap(self.first_page_path_2)
         self.first_page.setPixmap(self.pixmap)
-
-
-
-
 
         self.pushButton.clicked.connect(self.back)
 
         self.pushButton_user.clicked.connect(self.open0)
         self.pushButton_first_page.clicked.connect(self.open1)
 
-        self.data_file = ['user_photos/' + self.data[11], 'passports/' + self.data[17], 'agreements/' + self.data[19], 'attestats/' + self.data[21], 'achiev/' + self.data[28]]
+        self.data_file = ['user_photos/' + self.data[11], 'passports/' + self.data[17], 'agreements/' + self.data[19],
+                          'attestats/' + self.data[21], 'achiev/' + self.data[28]]
 
     def open0(self):
         print(os.getcwd())
@@ -158,15 +166,16 @@ class Dialog(QMainWindow, Dialog_ui):
             os.startfile(os.getcwd() + "/" + self.data_file[0])
         except Exception as err:
             print(err)
+
     def open1(self):
         os.startfile(os.getcwd() + "/" + self.data_file[1])
-
 
     def closeEvent(self, event):
         self.parent.setDisabled(False)
 
-
     def back(self):
+        data = [self.lineEdit_phone_2.text(), self.lineEdit_email_2.text(), self.lineEdit_adress_2.text(),
+                self.lineEdit_adress_3.text()]
         self.close()
         self.parent.setDisabled(False)
 
@@ -175,7 +184,7 @@ class Dialog(QMainWindow, Dialog_ui):
             doc = docxtpl.DocxTemplate("Формат студенческого билета.docx")
             context = {
                 "Факультет": self.lineEdit_direction_2.text(),
-                "Группа": self.lineEdit_group_num.text(),
+                "Группа": self.comboBox.currentText(),
 
                 "Ф": self.lineEdit_surname_2.text(),
                 "И": self.lineEdit_name_2.text(),
@@ -213,10 +222,6 @@ class Dialog(QMainWindow, Dialog_ui):
                 "Ф": self.lineEdit_surname_2.text(),
                 "И": self.lineEdit_name_2.text(),
                 "О": self.lineEdit_secondname_2.text(),
-
-
-
-
 
                 "Номеркнижки": self.lineEdit_num_book.text(),
 
