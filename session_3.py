@@ -153,19 +153,19 @@ class Dialog(QMainWindow, Dialog_ui):
             self.comboBox.setCurrentIndex(data.index(self.data[35]))
 
         # фото достижение
+        #
+        # self.user_photo_path_1 = 'user_photos/' + self.data[11]
+        # self.pixmap = QPixmap(self.user_photo_path_1)
+        # self.user_photo.setPixmap(self.pixmap)
 
-        self.user_photo_path_1 = 'user_photos/' + self.data[11]
-        self.pixmap = QPixmap(self.user_photo_path_1)
-        self.user_photo.setPixmap(self.pixmap)
-
-        self.first_page_path_2 = 'passports/' + self.data[17]
-        self.pixmap = QPixmap(self.first_page_path_2)
-        self.first_page.setPixmap(self.pixmap)
+        # self.first_page_path_2 = 'passports/' + self.data[17]
+        # self.pixmap = QPixmap(self.first_page_path_2)
+        # self.first_page.setPixmap(self.pixmap)
 
         self.pushButton.clicked.connect(self.back)
 
-        self.pushButton_user.clicked.connect(self.open0)
-        self.pushButton_first_page.clicked.connect(self.open1)
+        # self.pushButton_user.clicked.connect(self.open0)
+        # self.pushButton_first_page.clicked.connect(self.open1)
 
         self.data_file = ['user_photos/' + self.data[11], 'passports/' + self.data[17], 'agreements/' + self.data[19],
                           'attestats/' + self.data[21], 'achiev/' + self.data[28]]
@@ -231,6 +231,9 @@ class Dialog(QMainWindow, Dialog_ui):
                 "level5": "5",
                 "level6": "6",
 
+                "Проректор": "",
+                "Декан": self.dekan[4],
+
             }
             doc.render(context)
             doc.save('Студенческий билет.docx')
@@ -245,7 +248,8 @@ class Dialog(QMainWindow, Dialog_ui):
             context = {
                 "Факультет": self.lineEdit_direction_2.text(),
                 "Специальность": self.lineEdit_direction.text(),
-
+                "Проректор": "",
+                "Декан": self.dekan[4],
                 "Ф": self.lineEdit_surname_2.text(),
                 "И": self.lineEdit_name_2.text(),
                 "О": self.lineEdit_secondname_2.text(),
@@ -266,9 +270,9 @@ class Dialog(QMainWindow, Dialog_ui):
             context = {
                 "Факультет": self.lineEdit_direction_2.text(),
                 "Специальность": self.lineEdit_direction.text(),
-                "Группа": self.lineEdit_group_num.text(),
+                "Группа": self.comboBox.currentText(),
                 "Основа": self.lineEdit_teach_form.text(),
-                "Номердела": "",
+                "Номердела": self.lineEdit_number_of_doc_frame_3.text(),
                 "Ф": self.lineEdit_surname_2.text(),
                 "И": self.lineEdit_name_2.text(),
                 "О": self.lineEdit_secondname_2.text(),
