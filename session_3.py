@@ -98,6 +98,7 @@ class Dialog(QMainWindow, Dialog_ui):
 
 
         self.data = args[0]
+        print(self.data)
         self.lineEdit_name_2.setText(str(self.data[1]))
         self.lineEdit_secondname_2.setText(str(self.data[3]))
         self.lineEdit_surname_2.setText(str(self.data[2]))
@@ -120,13 +121,14 @@ class Dialog(QMainWindow, Dialog_ui):
         self.lineEdit_number_of_doc_frame_3.setText(str(self.data[20]))
         # фото аттестат
         self.lineEdit_teach_form.setText("бюджет" if self.data[22] else "платное")
-        # self.lineEdit_rus_2.setText(str(self.data[23]))
-        # self.lineEdit_math_2.setText(str(self.data[24]))
-        # self.lineEdit_inf.setText(str(self.data[25]))
-        # self.lineEdit_fizika.setText(str(self.data[26]))
-        # self.lineEdit_achiev.setText(str(self.data[27]))
-        # self.lineEdit_index_2.setText(str(self.data[34]))
         self.lineEdit_direction.setText(str(self.data[33]))
+        self.lineEdit_direction_2.setText(str(self.data[36]))
+        self.lineEdit_group_num.setText(str(self.data[35]))
+        self.lineEdit_num_book.setText(str(self.data[37]))
+        self.lineEdit_read_ticket.setText(str(self.data[38]))
+        self.lineEdit_date_zachis.setText(str(self.data[39]))
+        self.lineEdit_date_otchis.setText(str(self.data[40]))
+
         # фото достижение
 
         self.user_photo_path_1 = 'user_photos/' + self.data[11]
