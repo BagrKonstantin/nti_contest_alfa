@@ -58,12 +58,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         print(self.user)
 
         if self.user[32] == 3:
-
-
-
-        if user[32] == 3:
-
-            self.label_29.setText("Добро пожаловать в личный кабинет студента, \n{} {} {}".format(user[2], user[1], user[3]))
+            self.label_29.setText("Добро пожаловать в личный кабинет студента, \n{} {} {}".format(self.user[2], self.user[1], self.user[3]))
             self.tabWidget.setTabEnabled(1, False)
             self.tabWidget.setTabEnabled(2, False)
         else:
