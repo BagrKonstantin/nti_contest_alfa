@@ -21,6 +21,7 @@ class ChangePassWin(QDialog, Ui_Form):
         parent.setDisabled(True)
         super(ChangePassWin, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
         self.setWindowTitle("Dialog")
         print(args)
         self.user = args[0]
@@ -43,6 +44,12 @@ class ChangePassWin(QDialog, Ui_Form):
                     QMessageBox.critical(self, "Ошибка", "Пароли не совпадают", QMessageBox.Ok)
             else:
                 QMessageBox.critical(self, "Ошибка", "Проверьте правильность введённых данных", QMessageBox.Ok)
+        except Exception as err:
+            print(err)
+
+    def closeEvent(self, event):
+        try:
+            self.parent.setEnabled(True)
         except Exception as err:
             print(err)
 
