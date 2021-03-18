@@ -22,6 +22,8 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.user = args[0]
         print(self.user)
 
+
+
         self.tableWidget_5.cellClicked.connect(self.open_tab)
         if self.user[3] == 0:
             self.comboBox_2.addItems(['', 'ПМ', 'ИВТ', 'АУТС'])
@@ -41,6 +43,10 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
             con.close()
             self.tableWidget_5.setRowCount(len(data))
             for i in range(len(data)):
+
+                self.tableWidget_5.setVerticalHeaderItem(i, QTableWidgetItem())
+                self.tableWidget_5.verticalHeaderItem(i).setText(str(data[i][0]))
+
                 self.tableWidget_5.setItem(i, 0, QTableWidgetItem())
 
                 # print(sum(data[i][23] + data[i][24] + data[i][25] + data[i][26]))
@@ -76,8 +82,12 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 print(self.data)
                 print(self.tableWidget_5.currentRow())
                 self.update_data()
-                dialog = Dialog(self, self.data[self.tableWidget_5.currentRow()], self.user)
-                dialog.show()
+                for i in self.data:
+                    if i[0] == int(self.tableWidget_5.verticalHeaderItem(self.tableWidget_5.currentRow()).text()):
+                        dialog = Dialog(self, i, self.user)
+                        dialog.show()
+                        break
+
 
                 print("no error")
             except Exception as error:
