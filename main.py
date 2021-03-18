@@ -26,9 +26,13 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         user = args[0]
         print(user)
 
+
+
         if user[32] == 3:
 
             self.label_29.setText("Добро пожаловать в личный кабинет студента, \n{} {} {}".format(user[2], user[1], user[3]))
+            self.tabWidget.setTabEnabled(1, False)
+            self.tabWidget.setTabEnabled(2, False)
         else:
             self.label_29.setText("Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(user[2], user[1], user[3]))
 
@@ -47,6 +51,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.lineEdit_code.setInputMask("###-###")
         self.lineEdit_given_date.setInputMask("##-##-####")
         self.lineEdit_birht_date.setInputMask("##-##-####")
+
+
 
         self.pushButton_save_1
         self.pushButton_save_2
