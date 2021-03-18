@@ -143,6 +143,10 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
             for i in range(len(self.data)):
                 print(self.data[i])
+                print(1)
+                self.tableWidget_2.setVerticalHeaderItem(i, QTableWidgetItem())
+                self.tableWidget_2.verticalHeaderItem(i).setText(str(self.data[i][0]))
+
                 self.tableWidget_2.setItem(i, 0, QTableWidgetItem())
                 self.tableWidget_2.setItem(i, 1, QTableWidgetItem())
                 self.tableWidget_2.setItem(i, 2, QTableWidgetItem())
@@ -154,8 +158,8 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 self.tableWidget_2.item(i, 1).setText("Мужской" if self.data[i][4] == 0 else "Женский")
                 self.tableWidget_2.item(i, 2).setText(str(self.data[i][5]))
                 self.tableWidget_2.item(i, 3).setText(str(self.data[i][8]))
-                self.tableWidget_2.item(i, 4).setText(str(statuses[self.data[i][-5]]))
-                self.tableWidget_2.item(i, 5).setText(str(stadias[self.data[i][-4]]))
+                self.tableWidget_2.item(i, 4).setText(str(statuses[self.data[i][31]]))
+                self.tableWidget_2.item(i, 5).setText(str(stadias[self.data[i][32]]))
         except Exception as err:
             print(err)
 
@@ -182,9 +186,11 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         if msg.clickedButton() == ok_button:
             print("opendialog")
             try:
-                dialog = Dialog(self, self.data[self.tableWidget_2.verticalHeader().sortIndicatorSection() - 1])
-                dialog.show()
-                print("no error")
+                for i in self.data:
+                    if i[0] == int(self.tableWidget_2.verticalHeaderItem(self.tableWidget_2.currentRow()).text()):
+                        dialog = Dialog(self, i)
+                        dialog.show()
+                        break
             except Exception as error:
                 print(error)
 
