@@ -216,6 +216,9 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.frame_first.show()
         self.frame_second.hide()
 
+    def closeEvent(self, event):
+        self.parent.setDisabled(False)
+
 
 class UI_Task1(QMainWindow, Ui_MainWindow):
     def __init__(self, path):
