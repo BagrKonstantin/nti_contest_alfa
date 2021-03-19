@@ -66,6 +66,153 @@
         <string>Добро пожаловать в личный Кабинет</string>
        </property>
       </widget>
+      <widget class="QFrame" name="frame">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>831</width>
+         <height>481</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>50</y>
+          <width>811</width>
+          <height>411</height>
+         </rect>
+        </property>
+        <column>
+         <property name="text">
+          <string>ФИО</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Звание</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Должность</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Контакты</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Предмет</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Фото</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QPushButton" name="pushButton_raspisanie">
+        <property name="geometry">
+         <rect>
+          <x>720</x>
+          <y>20</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Расписание</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_30">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>20</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Факультет</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_napravlenie_stud">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>20</y>
+          <width>113</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_change_pass">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>121</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Сменить пароль</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_fakultet_stud">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>20</y>
+          <width>113</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_32">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>20</y>
+          <width>81</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Направление</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_dek_and_rek">
+        <property name="geometry">
+         <rect>
+          <x>582</x>
+          <y>20</y>
+          <width>131</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Деканат и ректорат</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
