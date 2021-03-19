@@ -192,6 +192,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         # self.user_photo_path_1 = 'user_photos/' + self.user[11]
         # self.pixmap = QPixmap(self.user_photo_path_1)
         # self.user_photo.setPixmap(self.pixmap)
+
+        self.lineEdit_photo_passport.setText('passports/' + self.user[17] if self.user[17] else "")
         #
         self.lineEdit_select_photo_of_doc.setText('passports/' + self.user[17] if self.user[17] else "")
         # self.first_page_path_2 = 'passports/' + self.user[17]
