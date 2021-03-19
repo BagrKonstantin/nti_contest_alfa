@@ -6,6 +6,9 @@ import time
 from session_2 import UI_Task1 as StaffUi
 from session_3 import UI_Task1 as DekanUi
 from change_pass import Ui_Form
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QPixmap
+
 
 import sqlite3
 import shutil
@@ -65,73 +68,121 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         self.user = args[0]
         print(self.user)
 
-        if self.user[32] == 3:
+        if self.user[43] == 1:
             self.label_29.setText(
                 "Добро пожаловать в личный кабинет студента, \n{} {} {}".format(self.user[2], self.user[1],
                                                                                 self.user[3]))
             self.tabWidget.setTabEnabled(1, False)
             self.tabWidget.setTabEnabled(2, False)
+            if self.user[33] == 'ПМ':
+                con = sqlite3.connect("bd.db")
+                cur = con.cursor()
+                self.prepod = cur.execute(
+                    """Select * from prepodovateli where pm = 1""").fetchall()
+                con.close()
+            elif self.user[33] == 'ИВТ':
+                con = sqlite3.connect("bd.db")
+                cur = con.cursor()
+                self.prepod = cur.execute(
+                    """Select * from prepodovateli where ivt = 1""").fetchall()
+                con.close()
+            elif self.user[33] == 'АУТС':
+                con = sqlite3.connect("bd.db")
+                cur = con.cursor()
+                self.prepod = cur.execute(
+                    """Select * from prepodovateli where ayts = 1""").fetchall()
+                con.close()
+            elif self.user[33] == 'ИкТ':
+                con = sqlite3.connect("bd.db")
+                cur = con.cursor()
+                self.prepod = cur.execute(
+                    """Select * from prepodovateli where ikt = 1""").fetchall()
+                con.close()
+            elif self.user[33] == 'ЗСС':
+                con = sqlite3.connect("bd.db")
+                cur = con.cursor()
+                self.prepod = cur.execute(
+                    """Select * from prepodovateli where zss = 1""").fetchall()
+                con.close()
+            print(self.prepod)
+            self.tableWidget.setRowCount(len(self.prepod))
+            for i in range(len(self.prepod)):
+                self.tableWidget.setItem(i, 0, QTableWidgetItem())
+                self.tableWidget.setItem(i, 1, QTableWidgetItem())
+                self.tableWidget.setItem(i, 2, QTableWidgetItem())
+                self.tableWidget.setItem(i, 3, QTableWidgetItem())
+                self.tableWidget.setItem(i, 4, QTableWidgetItem())
+                self.tableWidget.setItem(i, 5, QLabel)
+
+                self.tableWidget.item(i, 0).setText(self.prepod[1])
+                self.tableWidget.item(i, 1).setText(self.prepod[2])
+                self.tableWidget.item(i, 2).setText(self.prepod[3])
+                self.tableWidget.item(i, 3).setText(self.prepod[4])
+                self.tableWidget.item(i, 4).setText(self.prepod[6])
+                photo_path = 'prepod_foto/' + self.prepod[5]
+                pixmap = QPixmap(photo_path)
+                self.tableWidget.item(i, 5).setPixmap(pixmap)
+
+            self.lineEdit_fakultet_stud.setText(str(self.user[36]))
+            self.lineEdit_napravlenie_stud.setText(str(self.user[33]))
+
+
         else:
             self.label_29.setText(
                 "Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(self.user[2], self.user[1],
                                                                                    self.user[3]))
 
-        self.lineEdit_surname.setText(self.user[2])
-        self.lineEdit_name.setText(self.user[1])
-        self.lineEdit_secondname.setText(self.user[3])
-        self.lineEdit_email.setText(self.user[5])
+            self.lineEdit_surname.setText(self.user[2])
+            self.lineEdit_name.setText(self.user[1])
+            self.lineEdit_secondname.setText(self.user[3])
+            self.lineEdit_email.setText(self.user[5])
 
-        self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))
-        self.lineEdit_pass_number.setValidator(QtGui.QIntValidator(0, 100000))
-        self.lineEdit_index.setValidator(QtGui.QIntValidator(0, 10000000))
+            self.lineEdit_series.setValidator(QtGui.QIntValidator(0, 1000))
+            self.lineEdit_pass_number.setValidator(QtGui.QIntValidator(0, 100000))
+            self.lineEdit_index.setValidator(QtGui.QIntValidator(0, 10000000))
 
-        self.lineEdit_phone.setInputMask("+7(###)-###-##-##)")
-        self.lineEdit_code.setInputMask("###-###")
-        self.lineEdit_given_date.setInputMask("##-##-####")
-        self.lineEdit_birht_date.setInputMask("##-##-####")
+            self.lineEdit_phone.setInputMask("+7(###)-###-##-##)")
+            self.lineEdit_code.setInputMask("###-###")
+            self.lineEdit_given_date.setInputMask("##-##-####")
+            self.lineEdit_birht_date.setInputMask("##-##-####")
 
-        self.pushButton_save_1.clicked.connect(self.save_page_1)
-        self.pushButton_save_2.clicked.connect(self.save_page_2)
+            self.pushButton_save_1.clicked.connect(self.save_page_1)
+            self.pushButton_save_2.clicked.connect(self.save_page_2)
 
-        self.pushButton_recieve_agr.clicked.connect(self.printf)
+            self.pushButton_recieve_agr.clicked.connect(self.printf)
 
-        self.pushButton_zayvlenie.clicked.connect(self.printf_2)
+            self.pushButton_zayvlenie.clicked.connect(self.printf_2)
 
-        self.comboBox_form_of_edu.addItems(["бюджет", "платное"])
-        self.comboBox_educ_way.addItems(["Информационных технологий", "Сети и системы связи"])
+            self.comboBox_form_of_edu.addItems(["бюджет", "платное"])
+            self.comboBox_educ_way.addItems(["ПМ", "ИВТ", "АУТС", "ИкТ", "ЗСС"])
 
-        self.comboBox_achivements.addItems(["Олимпиада"])
-        self.pushButton_change_pass.clicked.connect(self.change_pass)
+            self.comboBox_achivements.addItems(["Олимпиада"])
 
-
-
-
-
-        self.lineEdit_email.setText(str(self.user[5]))
-        # password
-        self.lineEdit_birht_date.setText(str(self.user[7]))
-        self.lineEdit_phone.setText(str(self.user[8]))
-        self.lineEdit_place_birth.setText(str(self.user[9]))
-        self.radioButton_hostel.setChecked(True if self.user[10] else False)
-        # фото
-        self.lineEdit_series.setText(str(self.user[12]))
-        self.lineEdit_pass_number.setText(str(self.user[13]))
-        self.lineEdit_given_by.setText(str(self.user[14]))
-        self.lineEdit_code.setText(str(self.user[15]))
-        self.lineEdit_given_date.setText(str(self.user[16]))
-        # фото паспорт
-        self.lineEdit_adress.setText(str(self.user[18]))
-        # фото согласие
-        self.lineEdit_number_of_doc_frame_2.setText(str(self.user[20]))
-        # фото аттестат
-        #self.comboBox_form_of_edu.setCurrentIndex(0 if int(self.user[22]) else 1)
-        self.lineEdit_rus.setText(str(self.user[23]))
-        self.lineEdit_math.setText(str(self.user[24]))
-        self.lineEdit_IR_or_phys.setText(str(self.user[25]))
-        self.lineEdit_IR_or_phys.setText(str(self.user[26]))
-        #self.comboBox_achivements.setCurrentIndex(int(self.user[27]) if self.user[27] else 0)
-        self.lineEdit_index.setText(str(self.user[34]))
-        #self.comboBox_educ_way.setText(str(self.user[33]))
+            self.lineEdit_email.setText(str(self.user[5]))
+            # password
+            self.lineEdit_birht_date.setText(str(self.user[7]))
+            self.lineEdit_phone.setText(str(self.user[8]))
+            self.lineEdit_place_birth.setText(str(self.user[9]))
+            self.radioButton_hostel.setChecked(True if self.user[10] else False)
+            # фото
+            self.lineEdit_series.setText(str(self.user[12]))
+            self.lineEdit_pass_number.setText(str(self.user[13]))
+            self.lineEdit_given_by.setText(str(self.user[14]))
+            self.lineEdit_code.setText(str(self.user[15]))
+            self.lineEdit_given_date.setText(str(self.user[16]))
+            # фото паспорт
+            self.lineEdit_adress.setText(str(self.user[18]))
+            # фото согласие
+            self.lineEdit_number_of_doc_frame_2.setText(str(self.user[20]))
+            # фото аттестат
+            # self.comboBox_form_of_edu.setCurrentIndex(0 if int(self.user[22]) else 1)
+            self.lineEdit_rus.setText(str(self.user[23]))
+            self.lineEdit_math.setText(str(self.user[24]))
+            self.lineEdit_IR_or_phys.setText(str(self.user[25]))
+            self.lineEdit_IR_or_phys.setText(str(self.user[26]))
+            # self.comboBox_achivements.setCurrentIndex(int(self.user[27]) if self.user[27] else 0)
+            self.lineEdit_index.setText(str(self.user[34]))
+        # self.comboBox_educ_way.setText(str(self.user[33]))
         # фото достижение
 
         # self.user_photo_path_1 = 'user_photos/' + self.user[11]
@@ -153,6 +204,9 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         # self.user_photo_path_5 = 'achiev/' + self.user[28]
         # self.pixmap = QPixmap(self.user_photo_path_5)
         # self.personal_achiev.setPixmap(self.pixmap)
+
+        self.pushButton_change_pass.clicked.connect(self.change_pass)
+
 
     def change_pass(self):
         try:
@@ -314,10 +368,13 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
     def save_page_2(self):
         try:
-            data = [self.lineEdit_number_of_doc_frame_2.text(), self.lineEdit_select_photo_of_doc.text(), self.comboBox_form_of_edu.currentText(),
-                    self.comboBox_educ_way.currentText(), self.lineEdit_math.text(), self.lineEdit_rus.text(), self.lineEdit_IR_or_phys.text(),
+            data = [self.lineEdit_number_of_doc_frame_2.text(), self.lineEdit_select_photo_of_doc.text(),
+                    self.comboBox_form_of_edu.currentText(),
+                    self.comboBox_educ_way.currentText(), self.lineEdit_math.text(), self.lineEdit_rus.text(),
+                    self.lineEdit_IR_or_phys.text(),
                     self.lineEdit_fiz_ege.text(),
-                    self.comboBox_achivements.currentText(), self.lineEdit_achivement_photo.text(), self.comboBox_educ_way.isEnabled(),
+                    self.comboBox_achivements.currentText(), self.lineEdit_achivement_photo.text(),
+                    self.comboBox_educ_way.isEnabled(),
                     self.pushButton_zayvlenie.text()]
 
             con = sqlite3.connect("bd.db")
@@ -325,7 +382,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             cur.execute("""update user set (attestat_number, attestat_photo, form_of_education, napravlenie,
                                             ege_mat, ege_rus, ege_inf, ege_fis, achiev_title, achiev_photo, 
                                             document_original, agreement) = ("{}", "{}", "{}", "{}", "{}", "{}", "{}", 
-                                            "{}", "{}", "{}", "{}", "{}") where id_user = {}""".format(*data, self.user[0]))
+                                            "{}", "{}", "{}", "{}", "{}") where id_user = {}""".format(*data,
+                                                                                                       self.user[0]))
             con.commit()
             con.close()
             print('xxxx')
