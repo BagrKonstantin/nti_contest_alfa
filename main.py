@@ -113,19 +113,20 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                 self.tableWidget.setItem(i, 2, QTableWidgetItem())
                 self.tableWidget.setItem(i, 3, QTableWidgetItem())
                 self.tableWidget.setItem(i, 4, QTableWidgetItem())
-                self.tableWidget.setItem(i, 5, QLabel)
+                # self.tableWidget.setItem(i, 5, QLabel)
 
-                self.tableWidget.item(i, 0).setText(self.prepod[1])
-                self.tableWidget.item(i, 1).setText(self.prepod[2])
-                self.tableWidget.item(i, 2).setText(self.prepod[3])
-                self.tableWidget.item(i, 3).setText(self.prepod[4])
-                self.tableWidget.item(i, 4).setText(self.prepod[6])
-                photo_path = 'prepod_foto/' + self.prepod[5]
-                pixmap = QPixmap(photo_path)
-                self.tableWidget.item(i, 5).setPixmap(pixmap)
+                self.tableWidget.item(i, 0).setText(self.prepod[i][1])
+                self.tableWidget.item(i, 1).setText(self.prepod[i][2])
+                self.tableWidget.item(i, 2).setText(self.prepod[i][3])
+                self.tableWidget.item(i, 3).setText(self.prepod[i][4])
+                self.tableWidget.item(i, 4).setText(self.prepod[i][6])
+                # photo_path = 'prepod_foto/' + self.prepod[5]
+                # pixmap = QPixmap(photo_path)
+                # self.tableWidget.item(i, 5).setPixmap(pixmap)
 
             self.lineEdit_fakultet_stud.setText(str(self.user[36]))
             self.lineEdit_napravlenie_stud.setText(str(self.user[33]))
+            # self.pushButton_dek_and_rek.clicked.connect()
 
 
         else:
