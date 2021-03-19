@@ -129,6 +129,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
 
         else:
+            self.frame.hide()
             self.label_29.setText(
                 "Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(self.user[2], self.user[1],
                                                                                    self.user[3]))
