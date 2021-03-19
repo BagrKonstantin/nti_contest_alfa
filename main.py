@@ -122,7 +122,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                 self.tableWidget.item(i, 2).setText(self.prepod[i][3])
                 self.tableWidget.item(i, 3).setText(self.prepod[i][4])
                 self.tableWidget.item(i, 4).setText(self.prepod[i][6])
-                photo_path = 'data/prepod_foto/' + str(self.prepod[i][5])
+                photo_path = 'prepod_foto/' + str(self.prepod[i][5])
                 pixmap = QPixmap(photo_path)
                 self.tableWidget.cellWidget(i, 5).setPixmap(pixmap)
 
