@@ -29,11 +29,35 @@ class DecanContactWin(QDialog, DecanContact):
         self.setWindowTitle("Dialog")
         print(args)
         self.user = args[0]
-        con = sqlite3.connect("bd.db")
-        cur = con.cursor()
+        self.lineEdit_10.setText("Красивая Милана Леонидовна")
+        self.lineEdit_11.setText("Самохвалова Елена Георгиевна")
+        self.lineEdit_12.setText("8 (800) 555-50-50")
+        self.lineEdit_13.setText("rektor.sgu@yandex.ru")
+        # con = sqlite3.connect("bd.db")
+        # cur = con.cursor()
+        # if self.user[36] == "СиСС":
+        #     decan = cur.execute("""select * from dekanat where facultet = 1""").fetchall()
+        # else:
+        #     decan = cur.execute("""select * from dekanat where facultet = 0""").fetchall()
+        # con.close()
+        # con.close()
+        self.lineEdit.setText("Иванов Иван Иванович")
+        self.lineEdit_2.setText("8 (800) 001-00-01")
+        self.lineEdit_3.setText("ivanov.i.sgu@yandex.ru")
+        self.lineEdit_4.setText("Сидоров Сергей Петрович")
+        self.lineEdit_5.setText("8 (800) 001-00-02")
+        self.lineEdit_6.setText("sidorov.s.sgu@yandex.ru")
+        self.lineEdit_7.setText("Петрова Ирина Викторовна")
+        self.lineEdit_8.setText("8 (800) 001-00-03")
+        self.lineEdit_9.setText("petrova.i.sgu@yandex.ru")
 
-        con.close()
-        con.close()
+
+    def closeEvent(self, event):
+        try:
+            self.parent.setEnabled(True)
+        except Exception as err:
+            print(err)
+
 
 
 
