@@ -415,7 +415,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                     self.lineEdit_index.text(), self.lineEdit_adress.text(), self.lineEdit_agreement.text()]
             print(os.getcwd() + "/passports/" + self.lineEdit_photo_passport.text().split("/")[-1])
             copy2('{}'.format(self.lineEdit_photo_passport.text()), os.getcwd() + "/passports/" + self.lineEdit_photo_passport.text().split("/")[-1])
-            copy2('{}'.format(self.lineEdit_agreement.text()), os.getcwd() + "/agreements/" + self.lineEdit_agreement.text().split("/")[-1])
+            #copy2('{}'.format(self.lineEdit_agreement.text()), os.getcwd() + "/agreements/" + self.lineEdit_agreement.text().split("/")[-1])
 
 
             con = sqlite3.connect("bd.db")
@@ -445,7 +445,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
             copy2(self.lineEdit_select_photo_of_doc.text(), os.getcwd() + "/attestats/" + self.lineEdit_select_photo_of_doc.text().split("/")[-1])
             copy2(self.lineEdit_achivement_photo.text(), os.getcwd() + "/achiev/" + self.lineEdit_achivement_photo.text().split("/")[-1])
-            copy2(self.lineEdit_zayavlenie.text(), os.getcwd() + "/user_photos/" + self.lineEdit_zayavlenie.text().split("/")[-1])
+            #copy2(self.lineEdit_zayavlenie.text(), os.getcwd() + "/user_photos/" + self.lineEdit_zayavlenie.text().split("/")[-1])
 
             con = sqlite3.connect("bd.db")
             cur = con.cursor()

@@ -154,7 +154,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
                 self.tableWidget_2.setItem(i, 4, QTableWidgetItem())
                 self.tableWidget_2.setItem(i, 5, QTableWidgetItem())
                 self.tableWidget_2.item(i, 0).setText(
-                    str(self.data[i][1] + " " + self.data[i][2] + " " + self.data[i][3]))
+                    str(self.data[i][1] + " " + str(self.data[i][2]) + " " + str(self.data[i][3])))
                 self.tableWidget_2.item(i, 1).setText("Мужской" if self.data[i][4] == 0 else "Женский")
                 self.tableWidget_2.item(i, 2).setText(str(self.data[i][5]))
                 self.tableWidget_2.item(i, 3).setText(str(self.data[i][8]))
