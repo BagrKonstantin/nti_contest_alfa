@@ -1,6 +1,6 @@
 from enter import Ui_MainWindow
 from work_with_app import Ui_MainWindow as Ui_MainWindow2
-from PyQt5.QtWidgets import QMainWindow, QMessageBox, QDialog
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QDialog, QFileDialog
 from PyQt5 import QtWidgets, QtGui
 import time
 from session_2 import UI_Task1 as StaffUi
@@ -13,6 +13,7 @@ from PyQt5.QtGui import QPixmap
 import sqlite3
 import shutil
 import os
+from shutil import copy2
 import docxtpl
 
 
@@ -131,6 +132,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
             self.label_29.setText(
                 "Добро пожаловать в личный кабинет абитуриента, \n{} {} {}".format(self.user[2], self.user[1],
                                                                                    self.user[3]))
+            self.tabWidget.setTabEnabled(1, True)
+            self.tabWidget.setTabEnabled(2, True)
 
             self.lineEdit_surname.setText(self.user[2])
             self.lineEdit_name.setText(self.user[1])
@@ -189,24 +192,44 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         # self.pixmap = QPixmap(self.user_photo_path_1)
         # self.user_photo.setPixmap(self.pixmap)
         #
+        self.lineEdit_select_photo_of_doc.setText('passports/' + self.user[17] if self.user[17] else "")
         # self.first_page_path_2 = 'passports/' + self.user[17]
         # self.pixmap = QPixmap(self.first_page_path_2)
         # self.first_page.setPixmap(self.pixmap)
         #
-        # self.user_photo_path_3 = 'agreements/' + self.user[19]
-        # self.pixmap = QPixmap(self.user_photo_path_3)
-        # self.soglasie_na_zachislenie.setPixmap(self.pixmap)
+        self.lineEdit_agreement.setText('agreements/' + self.user[19] if self.user[19] else "")
         #
+        self.lineEdit_zayavlenie.setText('attestats/' + self.user[21] if self.user[21] else "")
         # self.user_photo_path_4 = 'attestats/' + self.user[21]
         # self.pixmap = QPixmap(self.user_photo_path_4)
         # self.document.setPixmap(self.pixmap)
-        #
+        self.lineEdit_achivement_photo.setText('achiev/' + self.user[28] if self.user[28] else "")
         # self.user_photo_path_5 = 'achiev/' + self.user[28]
         # self.pixmap = QPixmap(self.user_photo_path_5)
         # self.personal_achiev.setPixmap(self.pixmap)
 
         self.pushButton_change_pass.clicked.connect(self.change_pass)
 
+
+    def passport(self):
+        fname = QFileDialog.getOpenFileName(self, 'Выбрать фото', '')[0]
+        self.lineEdit_photo_passport.setText(fname)
+
+    def agreement(self):
+        fname = QFileDialog.getOpenFileName(self, 'Выбрать фото', '')[0]
+        self.lineEdit_agreement.setText(fname)
+
+    def doc(self):
+        fname = QFileDialog.getOpenFileName(self, 'Выбрать фото', '')[0]
+        self.lineEdit_select_photo_of_doc.setText(fname)
+
+    def achiv(self):
+        fname = QFileDialog.getOpenFileName(self, 'Выбрать фото', '')[0]
+        self.lineEdit_achivement_photo.setText(fname)
+
+    def zayv(self):
+        fname = QFileDialog.getOpenFileName(self, 'Выбрать фото', '')[0]
+        self.lineEdit_zayavlenie.setText(fname)
 
     def change_pass(self):
         try:
@@ -345,12 +368,17 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
     def save_page_1(self):
         try:
+
             data = [self.lineEdit_name.text(), self.lineEdit_surname.text(), self.lineEdit_secondname.text(),
                     self.lineEdit_email.text(), self.lineEdit_birht_date.text(), self.lineEdit_phone.text(),
                     self.lineEdit_place_birth.text(), self.radioButton_hostel.isChecked(), self.lineEdit_photo.text(),
                     self.lineEdit_series.text(), self.lineEdit_pass_number.text(), self.lineEdit_given_by.text(),
                     self.lineEdit_code.text(), self.lineEdit_given_date.text(), self.lineEdit_photo_passport.text(),
                     self.lineEdit_index.text(), self.lineEdit_adress.text(), self.lineEdit_agreement.text()]
+            print(os.getcwd() + "/passports/" + self.lineEdit_photo_passport.text().split("/")[-1])
+            copy2('{}'.format(self.lineEdit_photo_passport.text()), os.getcwd() + "/passports/" + self.lineEdit_photo_passport.text().split("/")[-1])
+            copy2('{}'.format(self.lineEdit_agreement.text()), os.getcwd() + "/agreements/" + self.lineEdit_agreement.text().split("/")[-1])
+
 
             con = sqlite3.connect("bd.db")
             cur = con.cursor()
@@ -376,6 +404,10 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
                     self.comboBox_achivements.currentText(), self.lineEdit_achivement_photo.text(),
                     self.comboBox_educ_way.isEnabled(),
                     self.pushButton_zayvlenie.text()]
+
+            copy2(self.lineEdit_select_photo_of_doc.text(), os.getcwd() + "/attestats/" + self.lineEdit_select_photo_of_doc.text().split("/")[-1])
+            copy2(self.lineEdit_achivement_photo.text(), os.getcwd() + "/achiev/" + self.lineEdit_achivement_photo.text().split("/")[-1])
+            copy2(self.lineEdit_zayavlenie.text(), os.getcwd() + "/user_photos/" + self.lineEdit_zayavlenie.text().split("/")[-1])
 
             con = sqlite3.connect("bd.db")
             cur = con.cursor()
