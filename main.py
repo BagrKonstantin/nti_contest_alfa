@@ -8,7 +8,7 @@ from session_3 import UI_Task1 as DekanUi
 from change_pass import Ui_Form
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
-
+from dekan_contact import Ui_Form as DecanContact
 
 import sqlite3
 import shutil
@@ -18,6 +18,24 @@ import docxtpl
 
 
 # import pkg_resources.py2_warn
+
+
+class DecanContactWin(QDialog, DecanContact):
+    def __init__(self, parent=None, *args):
+        parent.setDisabled(True)
+        super(DecanContactWin, self).__init__(parent)
+        self.setupUi(self)
+        self.parent = parent
+        self.setWindowTitle("Dialog")
+        print(args)
+        self.user = args[0]
+        con = sqlite3.connect("bd.db")
+        cur = con.cursor()
+
+        con.close()
+        con.close()
+
+
 
 
 class ChangePassWin(QDialog, Ui_Form):
@@ -128,7 +146,8 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
             self.lineEdit_fakultet_stud.setText(str(self.user[36]))
             self.lineEdit_napravlenie_stud.setText(str(self.user[33]))
-            # self.pushButton_dek_and_rek.clicked.connect()
+            self.pushButton_dek_and_rek.clicked.connect(self.decanat)
+            self.pushButton_raspisanie.clicked.connect(self.raspisanie)
 
 
         else:
@@ -197,7 +216,6 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
         # self.user_photo.setPixmap(self.pixmap)
 
         self.lineEdit_photo_passport.setText('passports/' + self.user[17] if self.user[17] else "")
-        #
         self.lineEdit_select_photo_of_doc.setText('passports/' + self.user[17] if self.user[17] else "")
         # self.first_page_path_2 = 'passports/' + self.user[17]
         # self.pixmap = QPixmap(self.first_page_path_2)
@@ -216,6 +234,20 @@ class UI_Task2(QMainWindow, Ui_MainWindow2):
 
         self.pushButton_change_pass.clicked.connect(self.change_pass)
 
+
+    def raspisanie(self):
+        try:
+            win = ChangePassWin(self, self.user)
+            win.show()
+        except Exception as err:
+            print(err)
+
+    def decanat(self):
+        try:
+            win = DecanContactWin(self, self.user)
+            win.show()
+        except Exception as err:
+            print(err)
 
     def passport(self):
         fname = QFileDialog.getOpenFileName(self, 'Выбрать фото', '')[0]
